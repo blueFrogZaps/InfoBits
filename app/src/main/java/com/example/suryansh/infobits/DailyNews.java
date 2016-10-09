@@ -63,8 +63,6 @@ public class DailyNews extends homepage{
             @Override
             public void onClick(View view) {
                 dialog.setContentView(R.layout.newssearch);
-                dialog.setTitle("Search News ...");
-                dialog.show();
                 start = ((DatePicker) dialog.findViewById(R.id.startDatePicker));
                 end = ((DatePicker) dialog.findViewById(R.id.endDatePicker));
                 Date today = new Date();
@@ -78,6 +76,8 @@ public class DailyNews extends homepage{
                 end.setMaxDate(today.getTime() + 19800000);
                 start.setMinDate(last.getTime());
                 start.setMinDate(last.getTime());
+                dialog.setTitle("Search News ...");
+                dialog.show();
             }
         });
         refresh.setOnClickListener(new View.OnClickListener() {

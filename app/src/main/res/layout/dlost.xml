@@ -39,7 +39,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_margin="15dp"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark" />
 
         <android.support.design.widget.FloatingActionButton
@@ -47,21 +47,21 @@
             android:layout_height="wrap_content"
             android:id="@+id/newConv"
             app:layout_anchorGravity="bottom|end" android:src="@android:drawable/ic_menu_send"
-            android:layout_alignWithParentIfMissing="false"
             android:clickable="true"
             android:onClick="newConv"
             app:backgroundTint="@color/colorPrimaryDark"
-            android:layout_below="@+id/dlostlayout"
-            android:layout_centerHorizontal="true" />
+            android:translationZ="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/fab_margin" />
 
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/header"
-            android:orientation="horizontal"
-            android:paddingLeft="40dp"
             android:id="@+id/documentLost"
-            android:paddingRight="40dp">
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
 
             <RadioButton
                 android:layout_width="wrap_content"
@@ -72,8 +72,7 @@
                 android:layout_alignTop="@+id/radioCompliment"
                 android:layout_toLeftOf="@+id/newConv"
                 android:layout_toStartOf="@+id/newConv"
-                android:layout_marginRight="25dp"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:buttonTint="#211d70" />
 
             <RadioButton
@@ -85,9 +84,9 @@
                 android:layout_alignTop="@+id/radioCompliment"
                 android:layout_toRightOf="@+id/radioCompliment"
                 android:layout_toEndOf="@+id/radioCompliment"
-                android:layout_gravity="center_horizontal"
-                android:textSize="25sp"
-                android:buttonTint="#211d70" />
+                android:textSize="20sp"
+                android:buttonTint="#211d70"
+                android:layout_marginLeft="25dp" />
 
         </RadioGroup>
         <RelativeLayout
@@ -104,7 +103,7 @@
                 android:id="@+id/journalLayout"
                 android:layout_alignParentLeft="false"
                 android:padding="10dp"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -112,11 +111,12 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Month\n&amp; Year"
                     android:id="@+id/monthYearText"
-                    android:textSize="28sp"
+                    android:textSize="20sp"
                     android:textAlignment="gravity"
                     android:layout_centerVertical="true"
                     android:layout_alignLeft="@+id/journalText"
-                    android:layout_alignStart="@+id/journalText" />
+                    android:layout_alignStart="@+id/journalText"
+                    android:layout_alignTop="@+id/monthYear" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -124,35 +124,35 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Journal"
                     android:id="@+id/journalText"
-                    android:textSize="28sp"
+                    android:textSize="20sp"
                     android:textAlignment="gravity"
-                    android:layout_margin="10dp" />
+                    android:layout_alignTop="@+id/journal"
+                    android:layout_marginLeft="10dp" />
 
                 <EditText
-                    android:layout_width="200dp"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:id="@+id/journal"
                     android:layout_gravity="right"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="#fff"
                     android:padding="5dp"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:layout_toRightOf="@+id/journalText"
-                    android:layout_margin="10dp"
-                    android:layout_alignParentRight="true" />
+                    android:layout_margin="10dp" />
 
                 <DatePicker
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/monthYear"
-                    android:layout_alignStart="@+id/journal"
                     android:layout_below="@+id/journal"
-                    android:layout_toRightOf="@+id/monthYearText"
+                    android:layout_toRightOf="@+id/journalText"
                     android:layout_margin="10dp"
                     android:calendarViewShown="false"
                     android:datePickerMode="spinner"
                     android:calendarTextColor="#211d70"
-                    android:spinnersShown="true" />
+                    android:spinnersShown="true"
+                    android:background="#fff" />
 
             </RelativeLayout>
 
@@ -162,22 +162,20 @@
                 android:layout_height="wrap_content"
                 android:background="#ddd"
                 android:padding="10dp"
-                android:id="@+id/bookLayout">
+                android:id="@+id/bookLayout"
+                android:visibility="gone">
 
                 <EditText
-                    android:layout_width="200dp"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:id="@+id/title"
                     android:layout_gravity="right"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="#fff"
                     android:padding="5dp"
-                    android:textSize="25sp"
-                    android:layout_alignTop="@+id/titleText"
-                    android:layout_alignRight="@+id/accno"
-                    android:layout_alignEnd="@+id/accno"
-                    android:layout_toEndOf="@+id/authorText"
-                    android:layout_toRightOf="@+id/authorText" />
+                    android:textSize="20sp"
+                    android:layout_toRightOf="@+id/accnoText"
+                    android:layout_margin="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -185,9 +183,10 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Title"
                     android:id="@+id/titleText"
-                    android:textSize="28sp"
+                    android:textSize="20sp"
                     android:textAlignment="gravity"
-                    android:layout_margin="10dp" />
+                    android:layout_margin="5dp"
+                    android:layout_alignTop="@+id/title" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -195,29 +194,25 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Author"
                     android:id="@+id/authorText"
-                    android:textSize="28sp"
+                    android:textSize="20sp"
                     android:textAlignment="gravity"
-                    android:layout_below="@+id/title"
-                    android:layout_alignParentLeft="false"
-                    android:layout_alignParentStart="false"
-                    android:layout_margin="10dp" />
+                    android:layout_margin="5dp"
+                    android:layout_alignTop="@+id/author" />
 
                 <EditText
-                    android:layout_width="200dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/author"
                     android:layout_gravity="right"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="#fff"
                     android:padding="5dp"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:layout_below="@+id/title"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:layout_alignRight="@+id/title"
-                    android:layout_alignEnd="@+id/title"
                     android:layout_alignLeft="@+id/title"
-                    android:layout_alignStart="@+id/title" />
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -225,42 +220,29 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Accession\nNo."
                     android:id="@+id/accnoText"
-                    android:textSize="28sp"
+                    android:textSize="20sp"
                     android:textAlignment="gravity"
-                    android:layout_below="@+id/authorText"
-                    android:layout_margin="10dp" />
+                    android:layout_margin="5dp"
+                    android:layout_alignTop="@+id/accno" />
 
                 <EditText
-                    android:layout_width="200dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/accno"
                     android:layout_gravity="right"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="#fff"
                     android:padding="5dp"
-                    android:textSize="25sp"
-                    android:layout_toRightOf="@+id/accnoText"
+                    android:textSize="20sp"
                     android:layout_below="@+id/author"
-                    android:layout_margin="10dp" />
+                    android:layout_alignLeft="@+id/author"
+                    android:layout_alignRight="@+id/author"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="1dp" />
 
             </RelativeLayout>
 
         </RelativeLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/textView6"
-            android:layout_below="@+id/newConv"
-            android:layout_alignLeft="@+id/header"
-            android:layout_alignStart="@+id/header"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:visibility="visible"
-            android:textIsSelectable="false"
-            android:textSize="12sp" />
 
     </RelativeLayout>
 

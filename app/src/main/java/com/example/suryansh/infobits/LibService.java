@@ -35,6 +35,16 @@ public class LibService extends homepage {
         navigationView.setItemIconTintList(null);
         cat = navigationView.getMenu().getItem(0);
         cat.setChecked(true);
+        View v = findViewById(R.id.libricons);
+        Integer[] icons = new Integer[]{R.id.imgbt_info, R.id.imgbt_news, R.id.imgbt_service4, R.id.imgbt_service5};
+        Integer[] dimens = getDimens();
+        Integer height = (dimens[0]/2 - getCorrectPixels(48))/2, width = (dimens[1] - getCorrectPixels(36 * (icons.length/2)))/2;
+        Integer dim = Math.min(height, width);
+        for(int i = 0; i < icons.length; i++){
+            ImageView img = (ImageView) v.findViewById(icons[i]);
+            img.setMinimumHeight(dim);
+            img.setMinimumWidth(dim);
+        }
         View navHeader = navigationView.getHeaderView(0);
         ((TextView) navHeader.findViewById(R.id.brand)).setText(name);
         ((TextView) navHeader.findViewById(R.id.email)).setText(email);

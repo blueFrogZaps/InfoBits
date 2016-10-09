@@ -39,22 +39,21 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_margin="15dp"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark" />
 
         <EditText
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/database"
             android:layout_gravity="right"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/header"
             android:textColor="@color/colorPrimaryDark"
             android:background="#fff"
             android:layout_margin="15dp"
             android:padding="5dp"
-            android:textSize="25sp"
-            android:layout_toRightOf="@+id/databaseText" />
+            android:textSize="20sp"
+            android:layout_toRightOf="@+id/databaseText"
+            android:layout_below="@+id/header" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -62,10 +61,10 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Database"
             android:id="@+id/databaseText"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:textAlignment="gravity"
-            android:layout_below="@+id/header"
-            android:layout_margin="15dp" />
+            android:layout_alignTop="@+id/database"
+            android:layout_marginLeft="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -73,25 +72,25 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Journal"
             android:id="@+id/journalText"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:textAlignment="gravity"
             android:layout_alignTop="@+id/journal"
-            android:layout_alignLeft="@+id/databaseText"
-            android:layout_alignStart="@+id/databaseText" />
+            android:layout_alignLeft="@+id/databaseText" />
 
         <EditText
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/journal"
             android:layout_gravity="right"
             android:textColor="@color/colorPrimaryDark"
             android:background="#fff"
             android:padding="5dp"
-            android:textSize="25sp"
-            android:layout_toRightOf="@+id/databaseText"
+            android:textSize="20sp"
             android:layout_below="@+id/database"
-            android:layout_margin="15dp"
-            android:layout_alignParentRight="true" />
+            android:layout_alignRight="@+id/database"
+            android:layout_alignLeft="@+id/database"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -99,11 +98,10 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Location"
             android:id="@+id/locationText"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:textAlignment="gravity"
-            android:layout_centerVertical="true"
             android:layout_alignLeft="@+id/journalText"
-            android:layout_alignStart="@+id/journalText" />
+            android:layout_alignTop="@+id/location" />
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
@@ -113,24 +111,25 @@
             android:clickable="true"
             android:onClick="newConv"
             app:backgroundTint="@color/colorPrimaryDark"
-            android:layout_below="@+id/location"
-            android:layout_margin="@dimen/fab_margin"
-            android:layout_centerHorizontal="true" />
+            android:translationZ="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/fab_margin" />
 
         <EditText
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/location"
             android:layout_gravity="right"
             android:textColor="@color/colorPrimaryDark"
             android:background="#fff"
             android:padding="5dp"
-            android:textSize="25sp"
-            android:layout_alignBottom="@+id/locationText"
+            android:textSize="20sp"
             android:layout_alignLeft="@+id/journal"
-            android:layout_alignStart="@+id/journal"
             android:layout_alignRight="@+id/journal"
-            android:layout_alignEnd="@+id/journal" />
+            android:layout_below="@+id/journal"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp" />
 
     </RelativeLayout>
 

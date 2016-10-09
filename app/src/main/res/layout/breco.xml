@@ -158,17 +158,16 @@
                     android:visibility="visible">
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/title1"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true" />
+                        android:layout_toRightOf="@+id/publisherText1"
+                        android:layout_alignParentRight="true" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -190,12 +189,11 @@
                         android:textAlignment="gravity"
                         android:layout_below="@+id/title1"
                         android:layout_alignParentLeft="false"
-                        android:layout_alignParentStart="false"
                         android:layout_margin="10dp" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/author1"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
@@ -205,7 +203,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:layout_below="@+id/title1"
-                        android:layout_marginTop="5dp" />
+                        android:layout_marginTop="5dp"
+                        android:layout_alignLeft="@+id/title1" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -215,22 +214,22 @@
                         android:id="@+id/editionText1"
                         android:textSize="20sp"
                         android:textAlignment="gravity"
-                        android:layout_below="@+id/authorText1"
+                        android:layout_below="@+id/author1"
                         android:layout_margin="10dp" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/edition1"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
                         android:layout_marginTop="5dp"
-                        android:layout_below="@+id/author1" />
+                        android:layout_below="@+id/author1"
+                        android:layout_alignLeft="@+id/author1"
+                        android:layout_alignRight="@+id/author1" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -240,12 +239,12 @@
                         android:id="@+id/publisherText1"
                         android:textSize="20sp"
                         android:textAlignment="gravity"
-                        android:layout_below="@+id/editionText1"
+                        android:layout_below="@+id/edition1"
                         android:layout_margin="10dp" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/publisher1"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
@@ -255,7 +254,9 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:layout_below="@+id/edition1"
-                        android:layout_marginTop="5dp" />
+                        android:layout_marginTop="5dp"
+                        android:layout_alignLeft="@+id/edition1"
+                        android:layout_alignRight="@+id/edition1" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -265,13 +266,13 @@
                         android:id="@+id/yearText1"
                         android:textSize="20sp"
                         android:textAlignment="gravity"
-                        android:layout_below="@+id/publisherText1"
+                        android:layout_below="@+id/publisher1"
                         android:layout_margin="10dp"
                         android:textIsSelectable="false" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/year1"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
@@ -284,7 +285,9 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="5dp"
-                        android:layout_below="@+id/publisher1" />
+                        android:layout_below="@+id/publisher1"
+                        android:layout_alignLeft="@+id/publisher1"
+                        android:layout_alignRight="@+id/publisher1" />
 
                 </RelativeLayout>
             </ScrollView>
@@ -309,16 +312,15 @@
                     android:visibility="visible">
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/title2"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/publisherText2"
                         android:layout_alignParentRight="true" />
 
                     <TextView
@@ -341,21 +343,22 @@
                         android:textAlignment="gravity"
                         android:layout_below="@+id/title2"
                         android:layout_alignParentLeft="false"
-                        android:layout_alignParentStart="false"
                         android:layout_margin="10dp" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/author2"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_below="@+id/title2"
                         android:layout_marginTop="5dp"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignLeft="@+id/title2" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -365,22 +368,22 @@
                         android:id="@+id/editionText2"
                         android:textSize="20sp"
                         android:textAlignment="gravity"
-                        android:layout_below="@+id/authorText2"
+                        android:layout_below="@+id/author2"
                         android:layout_margin="10dp" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/edition2"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
+                        android:layout_marginTop="5dp"
                         android:layout_below="@+id/author2"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="5dp" />
+                        android:layout_alignLeft="@+id/author2"
+                        android:layout_alignRight="@+id/author2" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -390,12 +393,12 @@
                         android:id="@+id/publisherText2"
                         android:textSize="20sp"
                         android:textAlignment="gravity"
-                        android:layout_below="@+id/editionText2"
+                        android:layout_below="@+id/edition2"
                         android:layout_margin="10dp" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/publisher2"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
@@ -404,8 +407,10 @@
                         android:textSize="20sp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/edition2"
                         android:layout_marginTop="5dp"
-                        android:layout_below="@+id/edition2" />
+                        android:layout_alignLeft="@+id/edition2"
+                        android:layout_alignRight="@+id/edition2" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -415,26 +420,28 @@
                         android:id="@+id/yearText2"
                         android:textSize="20sp"
                         android:textAlignment="gravity"
-                        android:layout_below="@+id/publisherText2"
-                        android:layout_margin="10dp" />
+                        android:layout_below="@+id/publisher2"
+                        android:layout_margin="10dp"
+                        android:textIsSelectable="false" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/year2"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
-                        android:padding="5dp"
-                        android:textSize="25sp"
-                        android:maxLength="4"
-                        android:linksClickable="false"
+                        android:padding="3dp"
+                        android:textSize="20sp"
                         android:inputType="number"
+                        android:maxLength="4"
                         android:numeric="integer"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="5dp"
-                        android:layout_below="@+id/publisher2" />
+                        android:layout_below="@+id/publisher2"
+                        android:layout_alignLeft="@+id/publisher2"
+                        android:layout_alignRight="@+id/publisher2" />
 
                 </RelativeLayout>
             </ScrollView>
@@ -458,15 +465,15 @@
                     android:visibility="visible">
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/title3"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
-                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/publisherText3"
                         android:layout_alignParentRight="true" />
 
                     <TextView
@@ -489,21 +496,22 @@
                         android:textAlignment="gravity"
                         android:layout_below="@+id/title3"
                         android:layout_alignParentLeft="false"
-                        android:layout_alignParentStart="false"
                         android:layout_margin="10dp" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/author3"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_below="@+id/title3"
                         android:layout_marginTop="5dp"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignLeft="@+id/title3" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -513,22 +521,22 @@
                         android:id="@+id/editionText3"
                         android:textSize="20sp"
                         android:textAlignment="gravity"
-                        android:layout_below="@+id/authorText3"
+                        android:layout_below="@+id/author3"
                         android:layout_margin="10dp" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/edition3"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
+                        android:layout_marginTop="5dp"
                         android:layout_below="@+id/author3"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="5dp" />
+                        android:layout_alignLeft="@+id/author3"
+                        android:layout_alignRight="@+id/author3" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -538,12 +546,12 @@
                         android:id="@+id/publisherText3"
                         android:textSize="20sp"
                         android:textAlignment="gravity"
-                        android:layout_below="@+id/editionText3"
+                        android:layout_below="@+id/edition3"
                         android:layout_margin="10dp" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/publisher3"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
@@ -552,8 +560,10 @@
                         android:textSize="20sp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/edition3"
                         android:layout_marginTop="5dp"
-                        android:layout_below="@+id/edition3" />
+                        android:layout_alignLeft="@+id/edition3"
+                        android:layout_alignRight="@+id/edition3" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -563,25 +573,28 @@
                         android:id="@+id/yearText3"
                         android:textSize="20sp"
                         android:textAlignment="gravity"
-                        android:layout_below="@+id/publisherText3"
-                        android:layout_margin="10dp" />
+                        android:layout_below="@+id/publisher3"
+                        android:layout_margin="10dp"
+                        android:textIsSelectable="false" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/year3"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
-                        android:layout_below="@+id/publisher3"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:numeric="integer"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:inputType="number"
-                        android:numeric="integer"
-                        android:maxLength="4"
-                        android:layout_marginTop="5dp" />
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/publisher3"
+                        android:layout_alignLeft="@+id/publisher3"
+                        android:layout_alignRight="@+id/publisher3" />
 
                 </RelativeLayout>
             </ScrollView>
@@ -605,15 +618,15 @@
                     android:visibility="visible">
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/title4"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
-                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/publisherText4"
                         android:layout_alignParentRight="true" />
 
                     <TextView
@@ -636,21 +649,22 @@
                         android:textAlignment="gravity"
                         android:layout_below="@+id/title4"
                         android:layout_alignParentLeft="false"
-                        android:layout_alignParentStart="false"
                         android:layout_margin="10dp" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/author4"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_below="@+id/title4"
                         android:layout_marginTop="5dp"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignLeft="@+id/title4" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -660,22 +674,22 @@
                         android:id="@+id/editionText4"
                         android:textSize="20sp"
                         android:textAlignment="gravity"
-                        android:layout_below="@+id/authorText4"
+                        android:layout_below="@+id/author4"
                         android:layout_margin="10dp" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/edition4"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
+                        android:layout_marginTop="5dp"
                         android:layout_below="@+id/author4"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="5dp" />
+                        android:layout_alignLeft="@+id/author4"
+                        android:layout_alignRight="@+id/author4" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -685,12 +699,12 @@
                         android:id="@+id/publisherText4"
                         android:textSize="20sp"
                         android:textAlignment="gravity"
-                        android:layout_below="@+id/editionText4"
+                        android:layout_below="@+id/edition4"
                         android:layout_margin="10dp" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/publisher4"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
@@ -699,8 +713,10 @@
                         android:textSize="20sp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/edition4"
                         android:layout_marginTop="5dp"
-                        android:layout_below="@+id/edition4" />
+                        android:layout_alignLeft="@+id/edition4"
+                        android:layout_alignRight="@+id/edition4" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -710,25 +726,28 @@
                         android:id="@+id/yearText4"
                         android:textSize="20sp"
                         android:textAlignment="gravity"
-                        android:layout_below="@+id/publisherText4"
-                        android:layout_margin="10dp" />
+                        android:layout_below="@+id/publisher4"
+                        android:layout_margin="10dp"
+                        android:textIsSelectable="false" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/year4"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
-                        android:layout_below="@+id/publisher4"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:numeric="integer"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:inputType="number"
-                        android:numeric="integer"
-                        android:maxLength="4"
-                        android:layout_marginTop="5dp" />
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/publisher4"
+                        android:layout_alignLeft="@+id/publisher4"
+                        android:layout_alignRight="@+id/publisher4" />
 
                 </RelativeLayout>
             </ScrollView>
@@ -752,15 +771,15 @@
                     android:visibility="visible">
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/title5"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
-                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/publisherText5"
                         android:layout_alignParentRight="true" />
 
                     <TextView
@@ -783,21 +802,22 @@
                         android:textAlignment="gravity"
                         android:layout_below="@+id/title5"
                         android:layout_alignParentLeft="false"
-                        android:layout_alignParentStart="false"
                         android:layout_margin="10dp" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/author5"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_below="@+id/title5"
                         android:layout_marginTop="5dp"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignLeft="@+id/title5" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -807,22 +827,22 @@
                         android:id="@+id/editionText5"
                         android:textSize="20sp"
                         android:textAlignment="gravity"
-                        android:layout_below="@+id/authorText5"
+                        android:layout_below="@+id/author5"
                         android:layout_margin="10dp" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/edition5"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
+                        android:layout_marginTop="5dp"
                         android:layout_below="@+id/author5"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="5dp" />
+                        android:layout_alignLeft="@+id/author5"
+                        android:layout_alignRight="@+id/author5" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -832,12 +852,12 @@
                         android:id="@+id/publisherText5"
                         android:textSize="20sp"
                         android:textAlignment="gravity"
-                        android:layout_below="@+id/editionText5"
+                        android:layout_below="@+id/edition5"
                         android:layout_margin="10dp" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/publisher5"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
@@ -846,8 +866,10 @@
                         android:textSize="20sp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/edition5"
                         android:layout_marginTop="5dp"
-                        android:layout_below="@+id/edition5" />
+                        android:layout_alignLeft="@+id/edition5"
+                        android:layout_alignRight="@+id/edition5" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -857,25 +879,28 @@
                         android:id="@+id/yearText5"
                         android:textSize="20sp"
                         android:textAlignment="gravity"
-                        android:layout_below="@+id/publisherText5"
-                        android:layout_margin="10dp" />
+                        android:layout_below="@+id/publisher5"
+                        android:layout_margin="10dp"
+                        android:textIsSelectable="false" />
 
                     <EditText
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/year5"
                         android:layout_gravity="right"
                         android:textColor="@color/colorPrimaryDark"
                         android:background="#fff"
                         android:padding="3dp"
                         android:textSize="20sp"
-                        android:layout_below="@+id/publisher5"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:numeric="integer"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:inputType="number"
-                        android:numeric="integer"
-                        android:maxLength="4"
-                        android:layout_marginTop="5dp" />
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/publisher5"
+                        android:layout_alignLeft="@+id/publisher5"
+                        android:layout_alignRight="@+id/publisher5" />
                 </RelativeLayout>
             </ScrollView>
         </RelativeLayout>

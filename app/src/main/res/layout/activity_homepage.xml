@@ -39,14 +39,13 @@
 
         <android.support.v4.view.ViewPager
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="260dp"
             android:id="@+id/view_pager"
-            android:padding="0dip"
-            android:layout_below="@+id/homeicons"
-            android:layout_marginTop="10dip"
-            android:layout_marginBottom="10dip"
-            android:fadingEdge="horizontal"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_above="@+id/pagination" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -59,105 +58,88 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/taylorFrancis"
+                android:id="@+id/os"
                 android:src="@mipmap/os"
                 android:onClick="onClickOs"
-                android:padding="0dp"
                 android:clickable="true"
                 android:layout_margin="12dip"
                 android:background="@color/colorPrimaryDark"
-                android:minHeight="96dp"
-                android:minWidth="96dp"
                 android:scaleType="fitCenter" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/scienceDirect"
+                android:id="@+id/libr"
                 android:src="@mipmap/libr"
                 android:onClick="onClickLibr"
-                android:padding="0dip"
                 android:clickable="true"
-                android:layout_toRightOf="@+id/taylorFrancis"
-                android:minWidth="96dip"
-                android:minHeight="96dip"
-                android:scaleType="fitCenter"
+                android:layout_toRightOf="@+id/os"
                 android:layout_margin="12dip"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/colorPrimaryDark"
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imgbt_service3"
+                android:id="@+id/libs"
                 android:src="@mipmap/libs"
                 android:onClick="onClickLibs"
-                android:padding="0dp"
                 android:clickable="true"
                 android:layout_margin="12dp"
-                android:layout_toRightOf="@+id/scienceDirect"
-                android:scaleType="fitCenter"
-                android:minWidth="96dp"
-                android:minHeight="96dp"
-                android:background="@color/colorPrimaryDark" />
+                android:layout_toRightOf="@+id/libr"
+                android:background="@color/colorPrimaryDark"
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/openAccess"
+                android:id="@+id/opac"
                 android:onClick="onClickOPAC"
                 android:src="@mipmap/opac"
-                android:padding="0dp"
                 android:clickable="true"
                 android:layout_margin="12dp"
-                android:layout_below="@+id/taylorFrancis"
-                android:scaleType="fitCenter"
-                android:minHeight="96dp"
-                android:minWidth="96dp"
-                android:background="#211d70" />
+                android:layout_below="@+id/os"
+                android:background="#211d70"
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/springer"
+                android:id="@+id/dn"
                 android:src="@mipmap/dn"
                 android:onClick="onClickDN"
-                android:padding="0dp"
                 android:longClickable="true"
                 android:clickable="true"
-                android:layout_below="@+id/scienceDirect"
-                android:layout_toRightOf="@+id/openAccess"
+                android:layout_below="@+id/libr"
+                android:layout_toRightOf="@+id/opac"
                 android:layout_margin="12dp"
-                android:scaleType="fitCenter"
-                android:minHeight="96dp"
-                android:minWidth="96dp"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/colorPrimaryDark"
+                android:scaleType="fitCenter" />
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imgbt_service6"
+                android:id="@+id/cwl"
                 android:onClick="onClickCWL"
-                android:padding="0dp"
                 android:src="@mipmap/cwl"
                 android:clickable="true"
                 android:layout_margin="12dp"
-                android:layout_below="@+id/imgbt_service3"
-                android:layout_toRightOf="@+id/springer"
-                android:minHeight="96dp"
-                android:minWidth="96dp"
-                android:scaleType="fitCenter"
-                android:background="@color/colorPrimaryDark" />
+                android:layout_below="@+id/libs"
+                android:layout_toRightOf="@+id/dn"
+                android:background="@color/colorPrimaryDark"
+                android:scaleType="fitCenter" />
         </RelativeLayout>
 
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="No Notices to Show"
             android:id="@+id/no_notice"
             android:textAlignment="center"
             android:gravity="center_vertical"
             android:layout_below="@+id/homeicons"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"
+            android:visibility="visible" />
 
         <RelativeLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -31,17 +31,14 @@ public class downloadable_links extends homepage implements  AdapterView.OnItemC
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        String title= bundle.getString("title");
-
+        String reference =bundle.getString("reference");
         toolbar = (Toolbar) findViewById(R.id.toolbar1);
         //setSupportActionBar(toolbar1);
-        toolbar.setTitle(title);
+        toolbar.setTitle(reference);
 
         listView = (ListView) findViewById(R.id.listView);
-
-        String reference =bundle.getString("reference");
         switch (reference){
-            case "Pearson":
+            case "Pearson e-Books":
                 values = new String[]{
                        "Biology (5)" ,
                         "Chemistry (9)",
@@ -59,7 +56,7 @@ public class downloadable_links extends homepage implements  AdapterView.OnItemC
                         "http://www.bits-pilani.ac.in:12354/pdf/pearson_e-books/Management.pdf"
                 };
                 break;
-            case "Science Direct":
+            case "Elsevier e-Books":
                 values = new String[]{
 
                         "Chemical Engineering (10)",
@@ -74,6 +71,7 @@ public class downloadable_links extends homepage implements  AdapterView.OnItemC
                         "http://www.bits-pilani.ac.in:12354/pdf/Elsevier_e-books/Mathematics.pdf",
                         "http://www.bits-pilani.ac.in:12354/pdf/Elsevier_e-books/Pharmacology.pdf",
                 };
+                toolbar.setLogo(R.mipmap.science_direct1);
                 break;
             case "Question Papers":
                 values = new String[] {"CLICK HERE", "iPhone", "WindowsMobile",

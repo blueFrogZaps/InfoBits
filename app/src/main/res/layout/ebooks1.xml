@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:layout_collapseMode="pin"
-            app:logo="@mipmap/logo"
+            app:logo="@drawable/ebm"
             android:title="@string/title_activity_ebooks"
             android:textColor="#fff"/>
 
@@ -32,7 +32,8 @@
         android:background="#e0dfeb"
         android:layout_below="@+id/app_bar"
         android:id="@+id/libricons"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:nestedScrollingEnabled="true">
 
         <TextView
             android:layout_width="match_parent"
@@ -41,183 +42,40 @@
             android:id="@+id/ebooksText"
             android:textSize="18dp"
             android:textColor="@color/colorPrimaryDark"
-            android:text="To access eBooks, please click any of them:"
-            android:padding="10dp" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/taylorFrancis"
-            android:src="@mipmap/taylor1"
-            android:background="#211d70"
-            android:scaleType="fitCenter"
-            android:minHeight="96dp"
-            android:minWidth="70dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="5dp"
-            android:clickable="true"
-            android:onClick="onClick"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="8dp"
-            android:layout_below="@+id/ebooksText" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/scienceDirect"
-            android:src="@mipmap/science_direct1"
-            android:background="#211d70"
-            android:minHeight="96dp"
-            android:minWidth="139dp"
-            android:clickable="true"
-            android:onClick="onClick"
-            android:scaleType="fitCenter"
-            android:layout_alignTop="@+id/taylorFrancis"
-            android:layout_toRightOf="@+id/taylorFrancis"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/openAccess"
-            android:src="@mipmap/oapen"
-            android:background="#211d70"
-            android:scaleType="fitCenter"
-            android:clickable="true"
-            android:onClick="onClick"
-            android:minHeight="96dp"
-            android:minWidth="147dp"
-            android:layout_below="@+id/taylorFrancis"
-            android:layout_alignLeft="@+id/taylorFrancis"
-            android:layout_alignStart="@+id/taylorFrancis"
-            android:layout_marginBottom="8dp" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/springer1"
-            android:clickable="true"
-            android:onClick="onClick"
-            android:src="@mipmap/springer"
-            android:background="#211d70"
-            android:minHeight="96dp"
-            android:scaleType="fitCenter"
-            android:minWidth="128dp"
-            android:layout_alignTop="@+id/taylorFrancis"
-            android:layout_toRightOf="@+id/scienceDirect"
-            android:layout_marginBottom="10dp" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#211d70"
-            android:src="@mipmap/intech1"
-            android:scaleType="fitCenter"
-            android:minHeight="96dp"
-            android:minWidth="158dp"
-            android:id="@+id/intech"
-            android:clickable="true"
-            android:onClick="onClick"
-            android:layout_alignTop="@+id/openAccess"
-            android:layout_alignRight="@+id/springer1"
-            android:layout_marginBottom="8dp" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/opentextbook_library1"
-            android:background="#211d70"
-            android:scaleType="fitCenter"
-            android:minHeight="96dp"
-            android:minWidth="148dp"
-            android:clickable="true"
-            android:onClick="onClick"
-            android:id="@+id/openTB"
-            android:layout_below="@+id/intech"
-            android:layout_alignRight="@+id/springer1"
-            android:layout_alignEnd="@+id/springer1"
-            android:layout_marginBottom="8dp" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#211d70"
-            android:src="@mipmap/pearson_education1"
-            android:scaleType="fitCenter"
-            android:minHeight="96dp"
-            android:minWidth="164dp"
-            android:clickable="true"
-            android:onClick="onClick"
-            android:id="@+id/pearsonEducation"
-            android:layout_alignTop="@+id/openTB"
-            android:layout_alignLeft="@+id/openAccess"
-            android:layout_alignStart="@+id/openAccess"
-            android:layout_marginBottom="8dp" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#211d70"
-            android:src="@mipmap/ebsco1"
-            android:scaleType="fitCenter"
-            android:minHeight="96dp"
-            android:id="@+id/ebsco"
-            android:minWidth="192dp"
-            android:clickable="true"
-            android:onClick="onClick"
-            android:layout_below="@+id/pearsonEducation"
-            android:layout_alignLeft="@+id/taylorFrancis"
-            android:layout_marginRight="5dp" />
+            android:text="To access eBooks, please click any of the below:"
+            android:padding="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/ebsco_details"
-            android:layout_alignTop="@+id/ebsco"
-            android:layout_alignRight="@+id/openTB"
-            android:text="EBSCO Credentials"
-            android:textSize="16dp"
-            android:layout_toRightOf="@+id/ebsco"
-            android:textColor="#211d70"
+            android:id="@+id/endNote"
+            android:padding="5dp"
+            android:text="EBSCO Credentials:\nUsername - bitspilani\nPassword - Pilanibits2016"
+            android:layout_below="@+id/ebooksText"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ebookList"
+            android:layout_below="@+id/endNote"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:dividerHeight="2dp"
+            android:divider="#211d70" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ebscoClick"
+            android:layout_toRightOf="@+id/endNote"
+            android:layout_toEndOf="@+id/endNote"
+            android:layout_alignTop="@+id/endNote"
+            android:padding="5dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="CLICK HERE FOR EBSCO"
             android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Username: bitspilani"
-            android:id="@+id/username"
-            android:layout_below="@+id/ebsco_details"
-            android:layout_alignLeft="@+id/ebsco_details"
-            android:layout_alignStart="@+id/ebsco_details"
-            android:textSize="15dp"
-            android:textColor="#211d70" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Password: $bitspilani$1"
-            android:id="@+id/password"
-            android:layout_below="@+id/username"
-            android:layout_alignLeft="@+id/username"
-            android:layout_alignStart="@+id/username"
-            android:textSize="15dp"
-            android:textColor="#211d70" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/ebscoClickHere"
-            android:textSize="20dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:layout_below="@+id/password"
-            android:layout_alignLeft="@+id/password"
-            android:layout_alignStart="@+id/password" />
-
     </RelativeLayout>
+
 </RelativeLayout>

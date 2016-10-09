@@ -61,7 +61,6 @@ public class ConnectWithLibrary extends homepage {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_communication_panel);
         spinner = (ProgressBar) findViewById(R.id.progressBar1);
@@ -594,7 +593,7 @@ public class ConnectWithLibrary extends homepage {
                     start = data.get("talk").indexOf("<tr>", start + 4);
                     n++;
                 }
-                vi.setMinimumHeight(getCorrectPixels(350 + (n - 1) * 300));
+                vi.setMinimumHeight(getCorrectPixels(2 * (350 + (n - 1) * 300)/5));
                 holder.talk.setVisibility(View.GONE);
                 holder.table.loadData(data.get("talk"),"text/html",null);
                 holder.table.setVisibility(View.VISIBLE);
@@ -606,12 +605,5 @@ public class ConnectWithLibrary extends homepage {
             }
             return vi;
         }
-    }
-
-    public int getCorrectPixels(int pixels){
-        float dips = 2 * pixels/5;
-        float scale = ConnectWithLibrary.this.getResources().getDisplayMetrics().density;
-        pixels = (int) ((int) dips * scale);
-        return pixels;
     }
 }

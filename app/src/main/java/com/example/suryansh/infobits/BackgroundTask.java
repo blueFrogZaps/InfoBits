@@ -6,15 +6,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -29,9 +25,6 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-/**
- * Created by Suryansh on 4/4/2016.
- */
 public class BackgroundTask extends AsyncTask<String,Void,String>{
     String register_url ="register.php";
     String login_url = "login.php";

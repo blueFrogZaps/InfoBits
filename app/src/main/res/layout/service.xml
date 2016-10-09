@@ -39,7 +39,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_margin="15dp"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark" />
 
         <android.support.design.widget.FloatingActionButton
@@ -50,8 +50,9 @@
             android:clickable="true"
             android:onClick="newConv"
             app:backgroundTint="@color/colorPrimaryDark"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/grievance"
+            android:translationZ="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:layout_margin="@dimen/fab_margin" />
 
         <RadioGroup
@@ -72,7 +73,7 @@
                 android:layout_alignTop="@+id/radioCompliment"
                 android:layout_toLeftOf="@+id/newConv"
                 android:layout_toStartOf="@+id/newConv"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:buttonTint="#211d70" />
 
             <RadioButton
@@ -84,7 +85,7 @@
                 android:layout_alignTop="@+id/radioCompliment"
                 android:layout_toRightOf="@+id/radioCompliment"
                 android:layout_toEndOf="@+id/radioCompliment"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:buttonTint="#211d70" />
 
             <RadioButton
@@ -96,7 +97,7 @@
                 android:layout_below="@+id/header"
                 android:layout_toRightOf="@+id/radioSuggest"
                 android:layout_toEndOf="@+id/radioSuggest"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:buttonTint="#211d70" />
 
             <RadioButton
@@ -109,7 +110,7 @@
                 android:layout_toLeftOf="@+id/newConv"
                 android:layout_toStartOf="@+id/newConv"
                 android:layout_gravity="center_vertical"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:buttonTint="#211d70" />
 
             <RadioButton
@@ -121,7 +122,7 @@
                 android:layout_alignTop="@+id/radioCompliment"
                 android:layout_toRightOf="@+id/radioCompliment"
                 android:layout_toEndOf="@+id/radioCompliment"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:buttonTint="#211d70" />
 
             <RadioButton
@@ -133,7 +134,7 @@
                 android:layout_below="@+id/header"
                 android:layout_toRightOf="@+id/radioSuggest"
                 android:layout_toEndOf="@+id/radioSuggest"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:buttonTint="#211d70" />
 
         </RadioGroup>

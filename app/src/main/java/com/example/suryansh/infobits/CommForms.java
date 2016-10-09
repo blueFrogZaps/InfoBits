@@ -1,7 +1,6 @@
 package com.example.suryansh.infobits;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -44,100 +43,94 @@ public class CommForms extends ConnectWithLibrary {
     String urlString  = apiURL + "newConv.php?username=" + username + "&password=" + password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if(username.isEmpty()){
-            Toast.makeText(this,"Please Login to Access Services and Resources of BITS Library",Toast.LENGTH_LONG).show();
-            finish();
-        }
-        else {
-            super.onCreate(savedInstanceState);
-            Bundle b = getIntent().getExtras();
-            cat = b.getInt("cat");
-            setContentView(Forms[cat - 1]);
-            setTitle(catnames[cat - 1]);
-            progress = (ProgressBar) findViewById(R.id.progressBar);
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-            if (cat == 2) {
-                RadioButton books = (RadioButton) findViewById(R.id.radioB);
-                books.setOnCheckedChangeListener(new RadioButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            findViewById(R.id.journalLayout).setVisibility(View.GONE);
-                            findViewById(R.id.bookLayout).setVisibility(View.VISIBLE);
-                        } else {
-                            findViewById(R.id.bookLayout).setVisibility(View.GONE);
-                            findViewById(R.id.journalLayout).setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
-                DatePicker datePicker = (DatePicker) findViewById(R.id.monthYear);
-                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    int daySpinnerId = Resources.getSystem().getIdentifier("day", "id", "android");
-                    if (daySpinnerId != 0) {
-                        View daySpinner = datePicker.findViewById(daySpinnerId);
-                        if (daySpinner != null) {
-                            daySpinner.setVisibility(View.GONE);
-                        }
-                    }
-                } else {
-                    try {
-                        Field f[] = datePicker.getClass().getDeclaredFields();
-                        for (Field field : f) {
-                            if (field.getName().equals("mDaySpinner") || field.getName().equals("mDayPicker")) {
-                                field.setAccessible(true);
-                                Object dayPicker = field.get(datePicker);
-                                ((View) dayPicker).setVisibility(View.GONE);
-                            }
-                        }
-                    } catch (SecurityException e) {
-                        e.printStackTrace();
-                    } catch (IllegalArgumentException e) {
-                        e.printStackTrace();
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
+        super.onCreate(savedInstanceState);
+        Bundle b = getIntent().getExtras();
+        cat = b.getInt("cat");
+        setContentView(Forms[cat - 1]);
+        setTitle(catnames[cat - 1]);
+        progress = (ProgressBar) findViewById(R.id.progressBar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (cat == 2) {
+            RadioButton books = (RadioButton) findViewById(R.id.radioB);
+            books.setOnCheckedChangeListener(new RadioButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        findViewById(R.id.journalLayout).setVisibility(View.GONE);
+                        findViewById(R.id.bookLayout).setVisibility(View.VISIBLE);
+                    } else {
+                        findViewById(R.id.bookLayout).setVisibility(View.GONE);
+                        findViewById(R.id.journalLayout).setVisibility(View.VISIBLE);
                     }
                 }
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                Date today = new Date();
-                Date last = new Date(0);
+            });
+            DatePicker datePicker = (DatePicker) findViewById(R.id.monthYear);
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                int daySpinnerId = Resources.getSystem().getIdentifier("day", "id", "android");
+                if (daySpinnerId != 0) {
+                    View daySpinner = datePicker.findViewById(daySpinnerId);
+                    if (daySpinner != null) {
+                        daySpinner.setVisibility(View.GONE);
+                    }
+                }
+            } else {
                 try {
-                    last = df.parse("1900-01-01");
-                } catch (ParseException e) {
+                    Field f[] = datePicker.getClass().getDeclaredFields();
+                    for (Field field : f) {
+                        if (field.getName().equals("mDaySpinner") || field.getName().equals("mDayPicker")) {
+                            field.setAccessible(true);
+                            Object dayPicker = field.get(datePicker);
+                            ((View) dayPicker).setVisibility(View.GONE);
+                        }
+                    }
+                } catch (SecurityException e) {
+                    e.printStackTrace();
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
-                datePicker.setMaxDate(today.getTime() + 19800000);
-                datePicker.setMinDate(last.getTime());
             }
-            if (cat == 1) {
-                FloatingActionButton add = (FloatingActionButton) findViewById(R.id.add);
-                add.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (reconum < 4) {
-                            reconum++;
-                            adjustreco();
-                        } else {
-                            Toast.makeText(CommForms.this, "Maximum 5 recommendations can be given.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                FloatingActionButton delete = (FloatingActionButton) findViewById(R.id.delete);
-                delete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (reconum > 0) {
-                            reconum--;
-                            adjustreco();
-                            if (reconum == 0) {
-                                findViewById(brecos[0]).setVisibility(View.VISIBLE);
-                            }
-                        } else {
-                            Toast.makeText(CommForms.this, "Minimum 1 recommendation is required.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Date today = new Date();
+            Date last = new Date(0);
+            try {
+                last = df.parse("1900-01-01");
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
+            datePicker.setMaxDate(today.getTime() + 19800000);
+            datePicker.setMinDate(last.getTime());
+        }
+        if (cat == 1) {
+            FloatingActionButton add = (FloatingActionButton) findViewById(R.id.add);
+            add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (reconum < 4) {
+                        reconum++;
+                        adjustreco();
+                    } else {
+                        Toast.makeText(CommForms.this, "Maximum 5 recommendations can be given.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            FloatingActionButton delete = (FloatingActionButton) findViewById(R.id.delete);
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (reconum > 0) {
+                        reconum--;
+                        adjustreco();
+                        if (reconum == 0) {
+                            findViewById(brecos[0]).setVisibility(View.VISIBLE);
+                        }
+                    } else {
+                        Toast.makeText(CommForms.this, "Minimum 1 recommendation is required.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
     }
 
@@ -183,7 +176,7 @@ public class CommForms extends ConnectWithLibrary {
             findViewById(R.id.add).setClickable(false);
             findViewById(R.id.delete).setClickable(false);
         }
-        ArrayList<String> inputArray = new ArrayList<String>();
+        ArrayList<String> inputArray = new ArrayList<>();
         String url = "";
         switch(cat) {
             case 1:
@@ -432,10 +425,10 @@ public class CommForms extends ConnectWithLibrary {
                     e.printStackTrace();
                 }
                 updateInternalData(json, "new");
-                Intent resultIntent = new Intent(CommForms.this,ConnectWithLibrary.class);
-                resultIntent.putExtra("update", "yes");
-                setResult(Activity.RESULT_OK, resultIntent);
-                finish();
+//                Intent resultIntent = new Intent(CommForms.this,ConnectWithLibrary.class);
+//                resultIntent.putExtra("update", "yes");
+//                setResult(Activity.RESULT_OK, resultIntent);
+                finishActivity(Activity.RESULT_OK);
             }else{
                 if(cat == 1){
                     findViewById(R.id.commMenu).setVisibility(View.VISIBLE);

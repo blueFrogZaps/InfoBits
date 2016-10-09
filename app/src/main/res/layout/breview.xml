@@ -27,7 +27,8 @@
         android:background="#ddd"
         android:layout_below="@+id/app_bar"
         android:layout_margin="10dp"
-        android:id="@+id/CommForm">
+        android:id="@+id/CommForm"
+        android:nestedScrollingEnabled="false">
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,22 +39,23 @@
             android:layout_gravity="left"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_margin="15dp"
-            android:textSize="28sp"
+            android:layout_margin="5dp"
+            android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark" />
 
         <EditText
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/title"
             android:layout_gravity="right"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/header"
             android:textColor="@color/colorPrimaryDark"
             android:background="#fff"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             android:padding="5dp"
-            android:textSize="25sp" />
+            android:textSize="20sp"
+            android:layout_toRightOf="@+id/authorText" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -63,11 +65,10 @@
             android:id="@+id/titleText"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/header"
-            android:layout_toStartOf="@+id/title"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="20dp"
             android:layout_alignBottom="@+id/title"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:textAlignment="gravity" />
 
         <TextView
@@ -76,27 +77,24 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Author"
             android:id="@+id/authorText"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:textAlignment="gravity"
             android:layout_below="@+id/title"
-            android:layout_alignLeft="@+id/titleText"
-            android:layout_alignStart="@+id/titleText"
-            android:layout_toStartOf="@+id/newConv"
-            android:layout_alignRight="@+id/titleText"
-            android:layout_alignEnd="@+id/titleText" />
+            android:layout_alignLeft="@+id/titleText" />
 
         <EditText
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/author"
             android:layout_gravity="right"
-            android:layout_alignLeft="@+id/authorText"
-            android:layout_alignStart="@+id/title"
             android:textColor="@color/colorPrimaryDark"
             android:background="#fff"
             android:layout_below="@+id/title"
             android:padding="5dp"
-            android:textSize="25sp" />
+            android:textSize="20sp"
+            android:layout_alignRight="@+id/title"
+            android:layout_toRightOf="@+id/authorText"
+            android:layout_alignLeft="@+id/title" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -104,7 +102,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Review"
             android:id="@+id/reviewText"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:textAlignment="gravity"
             android:layout_below="@+id/authorText"
             android:layout_alignLeft="@+id/authorText"
@@ -122,7 +120,6 @@
             android:layout_alignStart="@+id/reviewText"
             android:layout_alignRight="@+id/author"
             android:layout_alignEnd="@+id/author"
-            android:layout_alignParentEnd="false"
             android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark"
             android:background="#fff"
@@ -138,12 +135,12 @@
             android:layout_height="wrap_content"
             android:id="@+id/newConv"
             app:layout_anchorGravity="bottom|end" android:src="@android:drawable/ic_menu_send"
-            android:layout_alignWithParentIfMissing="false"
             android:clickable="true"
             android:onClick="newConv"
             app:backgroundTint="@color/colorPrimaryDark"
-            android:layout_below="@+id/review"
-            android:layout_centerHorizontal="true"
+            android:translationZ="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:layout_margin="@dimen/fab_margin" />
 
     </RelativeLayout>

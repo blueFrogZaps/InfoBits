@@ -12,7 +12,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:fitsSystemWindows="true"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:theme="@style/AppTheme.AppBarOverlay"
         android:baselineAligned="false"
@@ -24,7 +24,7 @@
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:layout_collapseMode="pin"
-            app:logo="@mipmap/logo"
+            app:logo="@mipmap/pearson_education1"
             android:textColor="#fff"/>
 
     </android.support.design.widget.AppBarLayout>

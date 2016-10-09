@@ -30,51 +30,51 @@
             android:background="#e0dfeb"
             android:layout_below="@+id/nav_toolbar"
             android:id="@+id/libricons"
-            android:layout_margin="10dp">
+            android:layout_margin="12dp">
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/taylorFrancis"
+                android:id="@+id/opac"
                 android:src="@mipmap/opac"
                 android:onClick="onClickOPAC"
                 android:scaleType="fitCenter"
-                android:minHeight="120dp"
-                android:minWidth="120dp"
-                android:background="#211d70"
-                android:layout_margin="25dp" />
+                android:background="#e0dfeb"
+                android:layout_margin="12dp" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/scienceDirect"
+                android:id="@+id/od"
                 android:src="@drawable/odxii"
                 android:onClick="onClickOD"
                 android:clickable="true"
-                android:background="#211d70"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"
-                android:layout_toRightOf="@+id/taylorFrancis" />
+                android:background="#e0dfeb"
+                android:layout_toRightOf="@+id/opac"
+                android:layout_margin="12dp" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/openAccess"
+                android:id="@+id/eb"
                 android:onClick="onClickEB"
                 android:src="@drawable/ebxii"
-                android:background="#211d70"
-                android:layout_centerVertical="true"
-                android:layout_alignLeft="@+id/taylorFrancis" />
+                android:background="#e0dfeb"
+                android:layout_below="@+id/opac"
+                android:layout_margin="12dp"
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/springer"
+                android:id="@+id/ir"
                 android:onClick="onClickIR"
                 android:src="@drawable/irxii"
-                android:background="#211d70"
-                android:layout_alignLeft="@+id/scienceDirect"
-                android:layout_alignTop="@+id/openAccess" />
+                android:layout_alignLeft="@+id/od"
+                android:layout_alignTop="@+id/eb"
+                android:layout_alignRight="@+id/od"
+                android:scaleType="fitCenter"
+                android:background="#e0dfeb" />
 
         </RelativeLayout>
 

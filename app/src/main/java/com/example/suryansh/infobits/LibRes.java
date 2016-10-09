@@ -36,6 +36,16 @@ public class LibRes extends homepage{
         navigationView.setItemIconTintList(null);
         cat = navigationView.getMenu().getItem(0);
         cat.setChecked(true);
+        View v = findViewById(R.id.libricons);
+        Integer[] icons = new Integer[]{R.id.od, R.id.opac, R.id.eb, R.id.ir};
+        Integer[] dimens = getDimens();
+        Integer height = (dimens[0]/2 - getCorrectPixels(60))/2, width = (dimens[1] - getCorrectPixels(36 * (icons.length/2)))/2;
+        Integer dim = Math.min(height, width);
+        for(int i = 0; i < icons.length; i++){
+            ImageView img = (ImageView) v.findViewById(icons[i]);
+            img.setMinimumHeight(dim);
+            img.setMinimumWidth(dim);
+        }
         View navHeader = navigationView.getHeaderView(0);
         ((TextView) navHeader.findViewById(R.id.brand)).setText(name);
         ((TextView) navHeader.findViewById(R.id.email)).setText(email);

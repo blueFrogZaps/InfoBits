@@ -9,7 +9,6 @@
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:id="@+id/nav_toolbar" app:logo="@mipmap/infobits"
         android:background="@color/colorPrimaryDark"
-        android:minHeight="?attr/actionBarSize"
         android:fitsSystemWindows="true"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -126,8 +125,6 @@
             android:background="#fff"
             android:layout_alignTop="@+id/pass"
             android:layout_alignBottom="@+id/pass"
-            android:layout_toRightOf="@+id/bt_forgot"
-            android:layout_toEndOf="@+id/bt_forgot"
             android:onClick="showPass" />
 
         <TextView

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -78,8 +80,8 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
     public static FileInputStream fileInput = null;
     public final static String apiURL = "http://172.21.1.15/apis/";
     public final static String imageApiURL = "http://172.21.1.15/uploads/";
-//    public final static String apiURL = "http://192.168.3.7:80/infoBITS/apis/";
-//    public final static String imageApiURL = "http://192.168.3.7:80/infoBITS/uploads/";
+//    public final static String apiURL = "http://192.168.3.10:80/infoBITS/apis/";
+//    public final static String imageApiURL = "http://192.168.3.10:80/infoBITS/uploads/";
     public final static String openURL = "http://universe.bits-pilani.ac.in:12354/";
     File dir;
     /**
@@ -99,10 +101,19 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
             username = user.get("username").toString();
             name = user.get("name").toString();
             password = user.get("password").toString();
-            ;
             usercat = user.get("category").toString();
             email = user.get("email").toString();
             avatar = user.get("avatar").toString();
+        }
+        View v = findViewById(R.id.homeicons);
+        Integer[] icons = new Integer[]{R.id.os, R.id.cwl, R.id.dn, R.id.libs, R.id.libr, R.id.opac};
+        Integer[] dimens = getDimens();
+        Integer height = dimens[0]/4 - getCorrectPixels(24), width = (dimens[1] - getCorrectPixels(24 * (icons.length/2)))/3;
+        Integer dim = Math.min(height, width);
+        for(int i = 0; i < icons.length; i++){
+            ImageView img = (ImageView) v.findViewById(icons[i]);
+            img.setMinimumHeight(dim);
+            img.setMinimumWidth(dim);
         }
         toolbar = (Toolbar) findViewById(R.id.nav_toolbar);
         drawerlayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -390,6 +401,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
                 else if (Build.VERSION.SDK_INT >= 23)
                     rbtn.setButtonTintList(this.getResources().getColorStateList(R.color.colorPrimaryDark, this.getTheme()));
                 rbtn.setChecked(false);
+                rbtn.setClickable(false);
                 pagin.addView(rbtn, i, pagin.getLayoutParams());
                 pagination.add(i, rbtn);
             }
@@ -709,5 +721,20 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
     public void LogInToast() {
         Toast.makeText(this, "Please Login to Access!", Toast.LENGTH_LONG).show();
+    }
+
+    public Integer[] getDimens(){
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+        return new Integer[]{height, width};
+    }
+
+    public int getCorrectPixels(float dips){
+        float scale = getResources().getDisplayMetrics().density;
+        int pixels = (int) ((int) dips * scale);
+        return pixels;
     }
 }

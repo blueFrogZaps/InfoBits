@@ -32,28 +32,29 @@
                     android:layout_toEndOf="@+id/textView2"
                     android:id="@+id/profile"
                     android:padding="10dp"
-                    android:visibility="gone" />
+                    android:visibility="visible"
+                    android:src="@mipmap/logo"
+                    android:layout_gravity="center_horizontal" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imageButton"
                     android:src="@android:drawable/ic_menu_edit"
-                    android:visibility="gone" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/upload_image"
-                    android:id="@+id/upload"
-                    android:textColor="@color/primary_text_default_material_dark"
-                    android:background="@drawable/roundedbutton"
-                    android:layout_marginTop="100dp"
-                    android:padding="10dp"
-                    android:visibility="gone"
-                    android:layout_marginRight="20dp" />
+                    android:visibility="visible" />
 
             </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/upload_image"
+                android:id="@+id/upload"
+                android:textColor="@color/primary_text_default_material_dark"
+                android:background="@drawable/roundedbutton"
+                android:padding="10dp"
+                android:visibility="gone"
+                android:layout_marginLeft="40dp" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -62,7 +63,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/NameLayout"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -70,7 +71,8 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/name"
                     android:id="@+id/textView"
-                    android:layout_marginLeft="15dp" />
+                    android:layout_marginLeft="15dp"
+                    android:visibility="visible" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -88,7 +90,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/EmailLayout"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -30,7 +30,7 @@
             android:background="#e0dfeb"
             android:layout_below="@+id/nav_toolbar"
             android:id="@+id/libricons"
-            android:layout_margin="10dp">
+            android:layout_margin="12dp">
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -38,14 +38,9 @@
                 android:id="@+id/imgbt_info"
                 android:src="@mipmap/cwl"
                 android:onClick="onClickCWL"
-                android:scaleType="fitCenter"
-                android:minHeight="120dp"
-                android:minWidth="120dp"
-                android:background="#211d70"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_alignBottom="@+id/imgbt_news" />
+                android:background="#e0dfeb"
+                android:layout_margin="12dp"
+                android:scaleType="centerCrop" />
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -54,16 +49,10 @@
                 android:src="@mipmap/dn"
                 android:onClick="onClickDN"
                 android:clickable="true"
-                android:background="#211d70"
-                android:layout_marginTop="46dp"
-                android:scaleType="fitXY"
-                android:minHeight="120dp"
-                android:minWidth="120dp"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/imgbt_service4"
-                android:layout_toEndOf="@+id/imgbt_service4"
-                android:layout_marginLeft="34dp"
-                android:layout_marginStart="34dp" />
+                android:background="#e0dfeb"
+                android:scaleType="centerCrop"
+                android:layout_margin="12dp"
+                android:layout_toRightOf="@+id/imgbt_info" />
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -71,12 +60,10 @@
                 android:id="@+id/imgbt_service4"
                 android:onClick="onClickLF"
                 android:src="@mipmap/lf"
-                android:background="#211d70"
+                android:background="#e0dfeb"
                 android:layout_below="@+id/imgbt_info"
-                android:layout_margin="25dp"
-                android:minHeight="120dp"
-                android:minWidth="120dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="centerCrop"
+                android:layout_margin="12dp" />
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -84,15 +71,11 @@
                 android:id="@+id/imgbt_service5"
                 android:onClick="onClickIBB"
                 android:src="@mipmap/ibb"
-                android:background="#211d70"
+                android:background="#e0dfeb"
                 android:layout_alignTop="@+id/imgbt_service4"
-                android:minHeight="120dp"
-                android:minWidth="120dp"
                 android:layout_alignRight="@+id/imgbt_news"
-                android:layout_alignEnd="@+id/imgbt_news"
                 android:layout_alignLeft="@+id/imgbt_news"
-                android:layout_alignStart="@+id/imgbt_news"
-                android:scaleType="fitCenter" />
+                android:scaleType="centerCrop" />
         </RelativeLayout>
 
 
