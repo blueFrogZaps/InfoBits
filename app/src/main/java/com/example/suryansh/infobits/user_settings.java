@@ -1,5 +1,6 @@
 package com.example.suryansh.infobits;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -23,6 +24,8 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Map;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -43,6 +46,9 @@ import java.util.Hashtable;
 import com.android.volley.AuthFailureError;
 import android.graphics.drawable.BitmapDrawable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class user_settings extends homepage implements View.OnClickListener {
     private static final int RESULT_LOAD_IMAGE =1;
     EditText mobile;
@@ -62,13 +68,18 @@ public class user_settings extends homepage implements View.OnClickListener {
     Class previous;
     private ImageLoader mImageLoader;
     private GoogleApiClient client;
+    String imageString;
+    Boolean reload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_settings);
+        login_info = getSharedPreferences("login_info", Context.MODE_PRIVATE);
+        edit_login_info = login_info.edit();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        reload = false;
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
         Bundle b = getIntent().getExtras();
@@ -151,14 +162,11 @@ public class user_settings extends homepage implements View.OnClickListener {
                     } else {
                         Toast.makeText(getApplicationContext(), "Not Connected to BITS Intranet!", Toast.LENGTH_LONG).show();
                     }
-
                 }
                 break;
-
             case R.id.upload:
                 Snackbar.make(v, "Upload Image Server call", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-
                 if (isConnected()) {
                     spinner.setVisibility(View.VISIBLE);
                     uploadImage();
@@ -172,7 +180,6 @@ public class user_settings extends homepage implements View.OnClickListener {
             default:
                 break;
         }
-
     }
 
     @Override
@@ -213,9 +220,6 @@ public class user_settings extends homepage implements View.OnClickListener {
     @Override
     public void onStop() {
         super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
                 "user_settings Page", // TODO: Define a title for the content shown.
@@ -228,6 +232,16 @@ public class user_settings extends homepage implements View.OnClickListener {
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(reload) {
+            finishAffinity();
+            Intent i12 = new Intent(user_settings.this, homepage.class);
+            startActivity(i12);
+        }
     }
 
     public void serverCalls(String type){
@@ -288,16 +302,11 @@ public class user_settings extends homepage implements View.OnClickListener {
 
             case "Change Password":{
                 String url = apiURL + "user_settings.php?username="+username +"&password="+password+"&new_value="+ newPassword.getEditText().getText().toString() +"&change_type=0";
-                // Request a string response from the provided URL.
-
                 updateCall(url, queue);
                 break;
-
             }
             case "Update Mobile":{
                 String url = apiURL + "user_settings.php?username="+username +"&password="+password+"&new_value="+ mobile.getText().toString() +"&change_type=1";
-                // Request a string response from the provided URL.
-
                 updateCall(url, queue);
                 break;
             }
@@ -340,7 +349,6 @@ public class user_settings extends homepage implements View.OnClickListener {
             newPassword.setVisibility(TextInputLayout.INVISIBLE);
             confirmPassword.setVisibility(TextInputLayout.INVISIBLE);
             changePassword.setVisibility(TextView.INVISIBLE);
-
             mobile.setEnabled(false);
             mobile.setInputType(InputType.TYPE_NULL);
             mobile.setFocusableInTouchMode(false);
@@ -354,7 +362,6 @@ public class user_settings extends homepage implements View.OnClickListener {
             newPassword.setVisibility(TextInputLayout.VISIBLE);
             confirmPassword.setVisibility(TextInputLayout.VISIBLE);
             changePassword.setVisibility(TextView.VISIBLE);
-
             mobile.setEnabled(true);
             mobile.setInputType(InputType.TYPE_CLASS_NUMBER);
             mobile.setFocusableInTouchMode(true);
@@ -362,28 +369,39 @@ public class user_settings extends homepage implements View.OnClickListener {
         }
     }
 
-        private void updateCall(String url, RequestQueue queue){
+    private void updateCall(String url, RequestQueue queue){
 
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            // Display the first 500 characters of the response string.
-                            spinner.setVisibility(View.GONE);
-                            showHideEdits(true);
-                            Toast.makeText(getApplicationContext(), "Response is: "+ response, Toast.LENGTH_LONG).show();
+        final String urlS = url;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    // Display the first 500 characters of the response string.
+                    spinner.setVisibility(View.GONE);
+                    showHideEdits(true);
+                    Toast.makeText(getApplicationContext(), "Response is: "+ response, Toast.LENGTH_LONG).show();
+                    try {
+                        JSONObject json = new JSONObject(response);
+                        if(urlS.contains("change_type=0") && json.get("status").toString().equals("1")){
+                            edit_login_info.putString("password", urlS.substring(urlS.indexOf("new_value=") + 10, urlS.indexOf("&change_type=")));
+                            edit_login_info.commit();
                         }
-                    }, new Response.ErrorListener() {
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     spinner.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "ERROR: "+ error.getMessage(), Toast.LENGTH_LONG).show();
                 }
-            });
+            }
+        );
 
-            // Add the request to the RequestQueue.
-            queue.add(stringRequest);
-        }
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
 
 
     public String getStringImage(Bitmap bmp){
@@ -398,42 +416,59 @@ public class user_settings extends homepage implements View.OnClickListener {
 
         final ImageLoader imageLoader = VolleySingleton.getInstance().getImageLoader();
 
-        String url = apiURL + "user_settings.php?username="+username +"&password="+password+"&change_type=2";
+        final String url = apiURL + "user_settings.php?username="+username +"&password="+password+"&change_type=2";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        //Disimissing the progress dialog
-                        spinner.setVisibility(View.GONE);
-                        //Showing toast message of the response
-                        Toast.makeText(getApplicationContext(), s , Toast.LENGTH_LONG).show();
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String s) {
+                    spinner.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(), s , Toast.LENGTH_LONG).show();
+                    try {
+                        JSONObject json = new JSONObject(s);
+                        if(url.contains("change_type=2") && json.get("status").toString().equals("1")){
+                            File file = new File(dir, json.get("file_name").toString());
+                            FileOutputStream fileOut;
+                            try {
+                                fileOut = new FileOutputStream(file);
+                                ((BitmapDrawable) image.getDrawable()).getBitmap().compress(Bitmap.CompressFormat.JPEG, 50, fileOut);
+                                edit_login_info.putString("avatar", file.getName());
+                                edit_login_info.commit();
+                                reload = true;
+                                fileOut.close();
+                            }catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        //Dismissing the progress dialog
-                        spinner.setVisibility(View.GONE);
-
-                        //Showing toast
-                        Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
-                    }
-                }){
+                }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    spinner.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+        ){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 //Converting Bitmap to String
-                String imageString = getStringImage( ((BitmapDrawable)image.getDrawable()).getBitmap());
+                imageString = getStringImage( ((BitmapDrawable)image.getDrawable()).getBitmap());
 
                 //Creating parameters
                 Map<String,String> params = new Hashtable<String, String>();
 
                 //Adding parameters
-                params.put("image", imageString);
-                params.put("username", username);
+                params.put("new_value", imageString);
 
                 //returning parameters
                 return params;
             }
+
         };
 
         //Creating a Request Queue
@@ -444,7 +479,6 @@ public class user_settings extends homepage implements View.OnClickListener {
     }
 
     private void showFileChooser() {
-
         Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(Intent.createChooser(galleryIntent, "Select Picture"), RESULT_LOAD_IMAGE);
     }

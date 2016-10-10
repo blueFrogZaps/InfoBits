@@ -154,8 +154,6 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         }
         dbhandler = new DBHandler(this, null, null);
         internal = dbhandler.selectData(2, "1 ORDER BY id ASC");
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         if (viewPager.getAdapter() == null)
             getNotices();
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();

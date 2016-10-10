@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imageButton"
                     android:src="@android:drawable/ic_menu_edit"
-                    android:visibility="visible" />
+                    android:visibility="invisible" />
 
             </LinearLayout>
 
