@@ -10,6 +10,10 @@ import android.widget.AdapterView;
 import android.view.View;
 import android.net.Uri;
 import android.content.Intent;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.ArrayList;
 import android.text.Spanned;
@@ -35,7 +39,15 @@ public class downloadable_links extends homepage implements  AdapterView.OnItemC
         toolbar = (Toolbar) findViewById(R.id.toolbar1);
         //setSupportActionBar(toolbar1);
         toolbar.setTitle(reference);
-
+        File profilepic = new File(dir, avatar);
+        try {
+            fileInput = new FileInputStream(profilepic);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if(fileInput != null){
+            setToolBarAvatar(profilepic);
+        }
         listView = (ListView) findViewById(R.id.listView);
         switch (reference){
             case "Pearson e-Books":

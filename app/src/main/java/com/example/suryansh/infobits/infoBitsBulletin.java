@@ -41,6 +41,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -56,7 +57,6 @@ import java.util.List;
 public class infoBitsBulletin extends homepage {
 
     private DBHandler dbhandler;
-    private Toolbar mToolbar;
     private TabLayout mTabLayout;
     private ViewPager mPager;
     private MyPagerAdapter mAdapter;
@@ -74,8 +74,8 @@ public class infoBitsBulletin extends homepage {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_infobitsbulletin);
-        mToolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(mToolbar);
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
         mIssue = (TextView) findViewById(R.id.issue);
         mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
         mPager = (ViewPager) findViewById(R.id.pager);
@@ -123,6 +123,15 @@ public class infoBitsBulletin extends homepage {
             alertShow("Connect to intranet and try again", "Not Connected to Intranet");
         }
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        File profilepic = new File(dir, avatar);
+        try {
+            fileInput = new FileInputStream(profilepic);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if(fileInput != null){
+            setToolBarAvatar(profilepic);
+        }
     }
 
     public void alertShow(String message, String title) {

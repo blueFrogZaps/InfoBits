@@ -49,7 +49,7 @@ public class CommForms extends ConnectWithLibrary {
         setContentView(Forms[cat - 1]);
         setTitle(catnames[cat - 1]);
         progress = (ProgressBar) findViewById(R.id.progressBar);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (cat == 2) {
             RadioButton books = (RadioButton) findViewById(R.id.radioB);

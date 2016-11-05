@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -40,7 +43,7 @@ public class Claim extends lfmsAllItems {
         claim = (Button) findViewById(R.id.claim);
         particulars = (TextView) findViewById(R.id.particulars);
         found = (TextView) findViewById(R.id.found);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.nav_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.nav_toolbar);
         setSupportActionBar(toolbar);
         Bundle b = getIntent().getExtras();
         sno = b.get("sno").toString();
@@ -66,6 +69,15 @@ public class Claim extends lfmsAllItems {
                 }
             }
         });
+        File profilepic = new File(dir, avatar);
+        try {
+            fileInput = new FileInputStream(profilepic);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if(fileInput != null){
+            setToolBarAvatar(profilepic);
+        }
     }
 
     class SaveItemDetails extends AsyncTask<String, Integer, String> {

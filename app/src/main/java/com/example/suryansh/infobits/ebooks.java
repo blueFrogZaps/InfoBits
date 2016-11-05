@@ -16,6 +16,10 @@ import android.widget.TextView;
 import android.text.method.LinkMovementMethod;
 import android.text.Html;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 public class ebooks extends homepage{
 
     public Toolbar toolbar;
@@ -26,6 +30,15 @@ public class ebooks extends homepage{
         setContentView(R.layout.ebooks1);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        File profilepic = new File(dir, avatar);
+        try {
+            fileInput = new FileInputStream(profilepic);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if(fileInput != null){
+            setToolBarAvatar(profilepic);
+        }
         ListView l = (ListView) findViewById(R.id.ebookList);
         String[] ebooks = {"Pearson Education", "Open Textbook Library", "Springer", "Taylor & Francis eBooks", "Open Access", "Intech", "Science Direct", "EBSCO"};
         Integer[] ebookImages = {R.mipmap.pearson_education1, R.mipmap.opentextbook_library1, R.mipmap.springer, R.mipmap.taylor1, R.mipmap.oapen, R.mipmap.intech1, R.mipmap.science_direct1, R.mipmap.ebsco1};

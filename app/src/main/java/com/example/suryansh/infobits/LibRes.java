@@ -28,7 +28,7 @@ public class LibRes extends homepage{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library_resources);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.nav_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.nav_toolbar);
         drawerlayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         setSupportActionBar(toolbar);
@@ -59,6 +59,7 @@ public class LibRes extends homepage{
             ((ImageView) navHeader.findViewById(R.id.profile)).setImageResource(R.mipmap.logo);
         }else{
             ((ImageView) navHeader.findViewById(R.id.profile)).setImageBitmap(BitmapFactory.decodeStream(fileInput));
+            setToolBarAvatar(profilepic);
         }
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerlayout,toolbar,R.string.drawer_open,R.string.drawer_close);
         drawerlayout.setDrawerListener(actionBarDrawerToggle);

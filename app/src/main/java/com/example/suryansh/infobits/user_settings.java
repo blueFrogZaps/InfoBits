@@ -77,7 +77,7 @@ public class user_settings extends homepage implements View.OnClickListener {
         setContentView(R.layout.user_settings);
         login_info = getSharedPreferences("login_info", Context.MODE_PRIVATE);
         edit_login_info = login_info.edit();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         reload = false;
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -108,6 +108,7 @@ public class user_settings extends homepage implements View.OnClickListener {
             image.setImageResource(R.mipmap.logo);
         }else{
             image.setImageBitmap(BitmapFactory.decodeStream(fileInput));
+            setToolBarAvatar(profilepic);
         }
         uploadBtn.setOnClickListener(this);
         updateMobile.setOnClickListener(this);

@@ -65,7 +65,7 @@ public class ConnectWithLibrary extends homepage {
         setContentView(R.layout.activity_communication_panel);
         spinner = (ProgressBar) findViewById(R.id.progressBar1);
         convlist = (ListView) findViewById(R.id.convList);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         msg = (TextView) findViewById(R.id.message);
         drawerlayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -84,6 +84,7 @@ public class ConnectWithLibrary extends homepage {
             ((ImageView) navHeader.findViewById(R.id.profile)).setImageResource(R.mipmap.logo);
         }else{
             ((ImageView) navHeader.findViewById(R.id.profile)).setImageBitmap(BitmapFactory.decodeStream(fileInput));
+            setToolBarAvatar(profilepic);
         }
         cat = navigationView.getMenu().getItem(0).getItemId();
         navigationView.setItemIconTintList(null);

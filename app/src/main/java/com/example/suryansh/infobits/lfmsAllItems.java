@@ -16,6 +16,9 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -39,8 +42,17 @@ public class lfmsAllItems extends homepage {
         setContentView(R.layout.activity_lfms_all_items);
         lv = (ListView) findViewById(R.id.list);
         msg = (TextView) findViewById(R.id.message);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        File profilepic = new File(dir, avatar);
+        try {
+            fileInput = new FileInputStream(profilepic);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if(fileInput != null){
+            setToolBarAvatar(profilepic);
+        }
         dbhandler = new DBHandler(this, null, null);
         internal = dbhandler.selectData(4,"1 ORDER BY id DESC");
         if(isConnected()){

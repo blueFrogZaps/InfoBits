@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -84,10 +86,6 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 //    public final static String imageApiURL = "http://192.168.3.10:80/infoBITS/uploads/";
     public final static String openURL = "http://universe.bits-pilani.ac.in:12354/";
     File dir;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
     private GoogleApiClient client;
 
     @Override
@@ -148,6 +146,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
                     ((ImageView) navHeader.findViewById(R.id.profile)).setImageResource(R.mipmap.logo);
                 } else {
                     ((ImageView) navHeader.findViewById(R.id.profile)).setImageBitmap(BitmapFactory.decodeStream(fileInput));
+                    setToolBarAvatar(profilepic);
                 }
 
             }
@@ -734,5 +733,25 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         float scale = getResources().getDisplayMetrics().density;
         int pixels = (int) ((int) dips * scale);
         return pixels;
+    }
+
+    public void setToolBarAvatar(File profilepic){
+        Drawable d = Drawable.createFromPath(profilepic.getAbsolutePath());
+        Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
+        Integer h = bitmap.getHeight();
+        Integer w = bitmap.getWidth();
+        if(h > w){
+            w = w * 150/h;
+            h = 150;
+        }
+        else if(h < w){
+            h = h * 150/w;
+            w = 150;
+        }
+        else{
+            h = w = 150;
+        }
+        Drawable dr = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, w, h, true));
+        toolbar.setOverflowIcon(dr);
     }
 }

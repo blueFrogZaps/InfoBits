@@ -21,6 +21,9 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -53,7 +56,7 @@ public class DailyNews extends homepage{
         dialog = new Dialog(DailyNews.this);
         spinner = (ProgressBar) findViewById(R.id.progressBar);
         newscast = (ListView) findViewById(R.id.newsList);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         msg = (TextView) findViewById(R.id.message);
         smsg = (TextView) findViewById(R.id.search_message);
         setSupportActionBar(toolbar);
@@ -99,6 +102,15 @@ public class DailyNews extends homepage{
                 }
             }
         });
+        File profilepic = new File(dir, avatar);
+        try {
+            fileInput = new FileInputStream(profilepic);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if(fileInput != null){
+            setToolBarAvatar(profilepic);
+        }
         dbhandler = new DBHandler(this, null, null);
         setNews(true);
     }
