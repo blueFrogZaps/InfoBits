@@ -6,7 +6,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_communication_panel" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.suryansh.infobits.CommunicationPanel"
+    tools:context="com.example.suryansh.infobits.ConnectWithLibrary"
     android:orientation="vertical"
     android:nestedScrollingEnabled="false">
     <ScrollView
@@ -31,7 +31,6 @@
                 android:clickable="true"
                 android:radius="50dp"
                 android:onClick="conversation1"
-                android:layout_below="@+id/error"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="false"
                 android:background="#e0dfeb"
@@ -172,7 +171,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/send"
             android:src="@android:drawable/ic_menu_send"
-            android:layout_alignTop="@+id/editText"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="false"
             android:layout_marginLeft="10dp" />
