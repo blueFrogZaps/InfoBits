@@ -50,4 +50,11 @@
     <string name="lost_and_found">Lost and Found</string>
     <string name="guest_user">Guest User</string>
     <string name="no_news_today">No Headlines Found for Today</string>
+    <string name="book_recommendation">Book Recommendation</string>
+    <string name="documents_not_found">Documents Not Found</string>
+    <string name="inaccessible_database">Inaccessible Database</string>
+    <string name="service_issues">Service Issues</string>
+    <string name="book_review">Book Review</string>
+    <string name="feedback">Feedback</string>
+    <string name="refresh_data">Refresh Data</string>
 </resources>

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:fitsSystemWindows="false"
-    tools:context="com.example.suryansh.infobits.user_settings">
+    tools:context="com.bitspilani.library.infobits.user_settings">
 
 
     <android.support.design.widget.AppBarLayout

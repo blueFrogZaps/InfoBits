@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.suryansh.infobits.infoBitsBulletin"
+    tools:context="com.bitspilani.library.infobits.infoBitsBulletin"
     android:scrollIndicators="bottom|top"
     android:nestedScrollingEnabled="true">
 

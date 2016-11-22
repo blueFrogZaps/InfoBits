@@ -1,44 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    //Responsible for menu items
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/breco"
-            android:title="Book Recommendation"
+            android:title="@string/book_recommendation"
             android:checked="true"
-            ></item>
+            />
 
         <item
             android:id="@+id/dlost"
-            android:title="Documents Not Found"
-            ></item>
+            android:title="@string/documents_not_found"
+            />
 
         <item
             android:id="@+id/database"
-            android:title="Inaccessible Database"
-            ></item>
+            android:title="@string/inaccessible_database"
+            />
 
         <item
             android:id="@+id/service"
-            android:title="Service Issues"
-            ></item>
+            android:title="@string/service_issues"
+            />
 
         <item
         android:id="@+id/breview"
-        android:title="Book Review"
-        ></item>
+        android:title="@string/book_review"
+        />
 
         <item
             android:id="@+id/feedback"
-            android:title="Feedback"
-            ></item>
+            android:title="@string/feedback"
+            />
         <item
             android:id="@+id/refresh"
-            android:title="Refresh Data"
+            android:title="@string/refresh_data"
             android:checkable="false"
-            ></item>
+            />
     </group>
 
 </menu>

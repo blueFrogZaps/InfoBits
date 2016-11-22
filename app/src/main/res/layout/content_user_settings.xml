@@ -6,7 +6,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/user_settings" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user_settings">
+    tools:context="com.bitspilani.library.infobits.user_settings">
 
     <RelativeLayout
         android:layout_width="match_parent"
