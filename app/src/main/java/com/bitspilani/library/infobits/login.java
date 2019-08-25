@@ -1,10 +1,15 @@
 package com.bitspilani.library.infobits;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.Toolbar;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -29,6 +34,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class login extends homepage {
 
@@ -38,18 +44,15 @@ public class login extends homepage {
     private ImageButton bt_show_pass;
     String UserName, Password;
     ProgressBar spinner;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
     private GoogleApiClient client;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        login_info = getSharedPreferences("login_info", MODE_PRIVATE);
         setContentView(R.layout.user_login);
+
+        login_info = getSharedPreferences("login_info", MODE_PRIVATE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.nav_toolbar);
         setSupportActionBar(toolbar);
         username = (EditText) findViewById(R.id.email);
@@ -58,8 +61,6 @@ public class login extends homepage {
         bt_signin = (Button) findViewById(R.id.bt_signin);
         spinner = (ProgressBar) findViewById(R.id.progressBar);
         bt_show_pass = (ImageButton) findViewById(R.id.showPass);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
@@ -97,9 +98,11 @@ public class login extends homepage {
             if (UserName.isEmpty()) {
                 Toast.makeText(login.this, "Please fill the username.", Toast.LENGTH_LONG).show();
             } else {
-                String urlString = apiURL + "forgot_password.php?username=" + UserName;
-                new APICall().execute(urlString);
-                toggleInterface(View.VISIBLE, false);
+//                String urlString = apiURL + "forgot_password.php?username=" + UserName;
+//                new APICall().execute(urlString);
+//                toggleInterface(View.VISIBLE, false);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW,Uri.parse(openURL+"account/forgot.php"));
+                startActivity(browserIntent);
             }
         }
     }
@@ -115,6 +118,8 @@ public class login extends homepage {
     private class APICall extends AsyncTask<String,Integer,String> {
 
         String err;
+        @TargetApi(Build.VERSION_CODES.KITKAT)
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         protected String doInBackground(String[] params){
             String urlString= params[0];
@@ -123,11 +128,12 @@ public class login extends homepage {
             try {
                 URL url = new URL(urlString);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                BufferedReader streamReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
+                BufferedReader streamReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), StandardCharsets.UTF_8));
                 while ((inputStr = streamReader.readLine()) != null)
                     responseStrBuilder.append(inputStr);
             } catch (Exception e ) {
                 err = "Network Error! Ensure you're connected to BITS Intranet";
+
             }
             return responseStrBuilder.toString();
         }
@@ -191,6 +197,7 @@ public class login extends homepage {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class LoadImage extends AsyncTask<String, String, Bitmap> {
 
         Bitmap bitmap;
@@ -205,6 +212,7 @@ public class login extends homepage {
             return bitmap;
         }
 
+        @SuppressLint("WrongThread")
         protected void onPostExecute(Bitmap image) {
             File file = new File(dir, filename);
             FileOutputStream fileOut;
@@ -235,6 +243,7 @@ public class login extends homepage {
 
     public void toggleInterface(int spinview, Boolean handle){
         spinner.setVisibility(spinview);
+        spinner.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         username.setEnabled(handle);
         password.setEnabled(handle);
         bt_signin.setClickable(handle);
@@ -249,13 +258,11 @@ public class login extends homepage {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
         Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "login Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
+                Action.TYPE_VIEW,
+                "login Page",
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
                 Uri.parse("android-app://com.bitspilani.library.infobits/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
@@ -268,13 +275,13 @@ public class login extends homepage {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "login Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
+                Action.TYPE_VIEW,
+                "login Page",
+
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
+
                 Uri.parse("android-app://com.bitspilani.library.infobits/http/host/path")
         );
         AppIndex.AppIndexApi.end(client, viewAction);

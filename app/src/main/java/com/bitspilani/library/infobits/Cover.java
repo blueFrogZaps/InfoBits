@@ -1,5 +1,6 @@
 package com.bitspilani.library.infobits;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -35,7 +36,7 @@ import java.util.concurrent.TimeoutException;
 
 public class Cover extends AppCompatActivity {
 
-//    public final static String apiURL = "http://172.21.1.15/apis/";
+    //    public final static String apiURL = "http://172.21.1.15/apis/";
 //    public final static String imageApiURL = "http://172.21.1.15/uploads/";
     public final static String apiURL = "http://192.168.43.71:80/infoBITS/apis/";
     public final static String imageApiURL = "http://192.168.43.71:80/infoBITS/uploads/";
@@ -132,6 +133,7 @@ public class Cover extends AppCompatActivity {
             return bitmap;
         }
 
+        @SuppressLint("WrongThread")
         protected void onPostExecute(Bitmap image) {
             imgs++;
             if(image != null){
@@ -166,7 +168,10 @@ public class Cover extends AppCompatActivity {
 
     public boolean isConnected() {
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        NetworkInfo networkInfo = null;
+        if (connMgr != null) {
+            networkInfo = connMgr.getActiveNetworkInfo();
+        }
         if(networkInfo != null && networkInfo.isConnected()){
             return true;
         }else{
@@ -295,13 +300,13 @@ public class Cover extends AppCompatActivity {
 
     public void launchHome(){
         new android.os.Handler().postDelayed(
-            new Runnable() {
-                public void run() {
-                    Intent i = new Intent(Cover.this, homepage.class);
-                    startActivity(i);
-                    finish();
-                }
-            }, 3000
+                new Runnable() {
+                    public void run() {
+                        Intent i = new Intent(Cover.this, homepage.class);
+                        startActivity(i);
+                        finish();
+                    }
+                }, 3000
         );
     }
 }
