@@ -82,10 +82,10 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
     Map<String, ?> user;
     public static String username, name, password, usercat, email, avatar;
     public static FileInputStream fileInput = null;
-//    public final static String apiURL = "http://172.21.1.15/apis/";
-//    public final static String imageApiURL = "http://172.21.1.15/uploads/";
-    public final static String apiURL = "http://192.168.43.71:80/infoBITS/apis/";
-    public final static String imageApiURL = "http://192.168.43.71:80/infoBITS/uploads/";
+    public final static String apiURL = "http://172.21.1.15/apis/";
+    public final static String imageApiURL = "http://172.21.1.15/uploads/";
+//    public final static String apiURL = "http://192.168.43.71:80/infoBITS/apis/";
+//    public final static String imageApiURL = "http://192.168.43.71:80/infoBITS/uploads/";
     public final static String openURL = "http://universe.bits-pilani.ac.in:12354/";
     File dir;
     private GoogleApiClient client;
