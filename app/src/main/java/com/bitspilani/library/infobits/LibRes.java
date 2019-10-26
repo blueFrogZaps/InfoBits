@@ -94,7 +94,7 @@ public class LibRes extends homepage{
     }
 
     public void onClickIR(View view) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://eprints.bits-pilani.ac.in/"));
+        Intent browserIntent = new Intent(LibRes.this,LoadBooks.class).putExtra("url","http://eprints.bits-pilani.ac.in/");
         startActivity(browserIntent);
     }
 

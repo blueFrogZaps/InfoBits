@@ -134,7 +134,6 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public boolean checkTable(int table) {
-
         SQLiteDatabase db = getWritableDatabase();
         Cursor cur2 = db.rawQuery("select name from sqlite_master where name='"
                 + TABLES[table] + "'", null);
@@ -160,5 +159,4 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
         return json;
     }
-
 }

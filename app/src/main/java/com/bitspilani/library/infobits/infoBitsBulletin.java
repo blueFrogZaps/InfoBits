@@ -1,6 +1,7 @@
 package com.bitspilani.library.infobits;
 
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -67,7 +68,8 @@ public class infoBitsBulletin extends homepage {
     ProgressBar spinner;
     JSONObject internal;
     List<String> updatevalues;
-    public String[] tabTitles = {"CHEMICAL", "CIVIL", "EEE", "CS", "MECH", "PHARMA", "BIO", "CHEM", "ECO", "MATHS", "PHY", "HUM", "MAN"};
+   // public String[] tabTitles = {"CHEMICAL", "CIVIL", "EEE", "CS", "MECH", "PHARMA", "BIO", "CHEM", "ECO", "MATHS", "PHY", "HUM", "MAN"};
+    public ArrayList<String> tabTitles = new ArrayList<>();
     private GoogleApiClient client;
 
     @Override
@@ -301,14 +303,15 @@ public class infoBitsBulletin extends homepage {
 
         @Override
         public int getCount() {
-            return this.fragments.size();
+            return tabTitles.size();
             //return 13;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-
-            return tabTitles[position];
+            if(position<tabTitles.size())
+                return tabTitles.get(position);
+            return  tabTitles.get(0);
         }
     }
 
@@ -327,6 +330,7 @@ public class infoBitsBulletin extends homepage {
             return bitmap;
         }
 
+        @SuppressLint("WrongThread")
         protected void onPostExecute(Bitmap image) {
             if(image != null){
                 String ext = filename.substring(filename.lastIndexOf("."));
@@ -352,19 +356,15 @@ public class infoBitsBulletin extends homepage {
 
     public void serverCalls() {
 
-        //  spinner.setVisibility(View.VISIBLE);
-        // Instantiate the RequestQueue.
         final RequestQueue queue = VolleySingleton.getInstance().getRequestQueue();
 
         String url = apiURL + "bulletin.php?" + "username=" + username + "&password=" + password;
-        // Request a string response from the provided URL.
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(
                 url, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
-
                 SharedPreferences sp = getSharedPreferences("bulletinMonth", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 Date date = new Date();
@@ -377,7 +377,6 @@ public class infoBitsBulletin extends homepage {
                 editor.putInt("bulletinYear", year);
 
                 try {
-
                     if (response.has("err_message") && !response.get("err_message").toString().isEmpty()) {
                         Toast.makeText(getApplicationContext(), response.get("err_message").toString(), Toast.LENGTH_LONG).show();
                     } else {
@@ -435,61 +434,73 @@ public class infoBitsBulletin extends homepage {
     }
 
     public void saveToDB(BulletinResponse bulletinResponse) {
-        for (int i = 0; i < tabTitles.length; i++) {
-            switch (i) {
-                case 0:
-                    current_sub = bulletinResponse.CHEMICAL;
-                    break;
-                case 1:
-                    current_sub = bulletinResponse.CIVIL;
-                    break;
-                case 2:
-                    current_sub = bulletinResponse.EEE;
-                    break;
-                case 3:
-                    current_sub = bulletinResponse.EEE;
-                    break;
-                case 4:
-                    current_sub = bulletinResponse.MECH;
-                    break;
-                case 5:
-                    current_sub = bulletinResponse.PHARMA;
-                    break;
-                case 6:
-                    current_sub = bulletinResponse.BIO;
-                    break;
-                case 7:
-                    current_sub = bulletinResponse.CHEM;
-                    break;
-                case 8:
-                    current_sub = bulletinResponse.ECO;
-                    break;
-                case 9:
-                    current_sub = bulletinResponse.MATH;
-                    break;
-                case 10:
-                    current_sub = bulletinResponse.PHY;
-                    break;
-                case 11:
-                    current_sub = bulletinResponse.HUM;
-                    break;
-                case 12:
-                    current_sub = bulletinResponse.MAN;
-                    break;
+        try{
+            System.out.println("BULLETIN RESPONSE: "+bulletinResponse.subjectAvailable.toString());
+            tabTitles = bulletinResponse.subjectAvailable;
+            for (int i = 0; i < tabTitles.size(); i++) {
+                current_sub = bulletinResponse.subjects.get(i);
+            /*switch (i) {
+                    case 0:
+                        current_sub = bulletinResponse.CHEMICAL;
+                        break;
+                    case 1:
+                        current_sub = bulletinResponse.CIVIL;
+                        break;
+                    case 2:
+                        current_sub = bulletinResponse.EEE;
+                        break;
+                    case 3:
+                        current_sub = bulletinResponse.EEE;
+                        break;
+                    case 4:
+                        current_sub = bulletinResponse.MECH;
+                        break;
+                    case 5:
+                        current_sub = bulletinResponse.PHARMA;
+                        break;
+                    case 6:
+                        current_sub = bulletinResponse.BIO;
+                        break;
+                    case 7:
+                        current_sub = bulletinResponse.CHEM;
+                        break;
+                    case 8:
+                        current_sub = bulletinResponse.ECO;
+                        break;
+                    case 9:
+                        current_sub = bulletinResponse.MATH;
+                        break;
+                    case 10:
+                        current_sub = bulletinResponse.PHY;
+                        break;
+                    case 11:
+                        current_sub = bulletinResponse.HUM;
+                        break;
+                    case 12:
+                        current_sub = bulletinResponse.MAN;
+                        break;
+                }*/
+                if(current_sub!=null)
+                {
+                    updatevalues = new ArrayList<String>(Arrays.asList(new String[]{current_sub.book1.pic, current_sub.book2.pic, current_sub.book3.pic, current_sub.book4.pic,
+                        current_sub.book1.type, current_sub.book2.type, current_sub.book3.type, current_sub.book4.type,
+                        current_sub.book1.url, current_sub.book2.url, current_sub.book3.url, current_sub.book4.url,
+                        current_sub.journal1.pic, current_sub.journal2.pic, current_sub.journal3.pic, current_sub.journal4.pic,
+                        current_sub.journal1.type, current_sub.journal2.type, current_sub.journal3.type, current_sub.journal4.type,
+                        current_sub.journal1.url, current_sub.journal2.url, current_sub.journal3.url, current_sub.journal4.url}));
+                    System.out.println("I: "+i);
+                    JSONObject check = dbhandler.selectData(1, "id = " + i);
+                    if (check.length() != 0) {
+                        dbhandler.updateData(5, updatevalues.toArray(new String[0]), i);
+                    } else {
+                        updatevalues.add(0, String.valueOf(i));
+                        dbhandler.addData(5, updatevalues.toArray(new String[0]));
+                    }
+                }
             }
-            updatevalues = new ArrayList<String>(Arrays.asList(new String[]{current_sub.book1.pic, current_sub.book2.pic, current_sub.book3.pic, current_sub.book4.pic,
-                    current_sub.book1.type, current_sub.book2.type, current_sub.book3.type, current_sub.book4.type,
-                    current_sub.book1.url, current_sub.book2.url, current_sub.book3.url, current_sub.book4.url,
-                    current_sub.journal1.pic, current_sub.journal2.pic, current_sub.journal3.pic, current_sub.journal4.pic,
-                    current_sub.journal1.type, current_sub.journal2.type, current_sub.journal3.type, current_sub.journal4.type,
-                    current_sub.journal1.url, current_sub.journal2.url, current_sub.journal3.url, current_sub.journal4.url}));
-            JSONObject check = dbhandler.selectData(1, "id = " + i);
-            if (check.length() != 0) {
-                dbhandler.updateData(5, updatevalues.toArray(new String[0]), i);
-            } else {
-                updatevalues.add(0, String.valueOf(i));
-                dbhandler.addData(5, updatevalues.toArray(new String[0]));
-            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -539,8 +550,8 @@ public class infoBitsBulletin extends homepage {
 
                                 @Override
                                 public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                                    Uri uri = Uri.parse(links.get(position)); // missing 'http://' will cause crashed
-                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                  //  Uri uri = Uri.parse(links.get(position)); // missing 'http://' will cause crashed
+                                    Intent intent = new Intent(infoBitsBulletin.this,LoadBooks.class).putExtra("url",links.get(position));
                                     startActivity(intent);
                                 }
                             });

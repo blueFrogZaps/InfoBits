@@ -20,6 +20,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +58,9 @@ public class ConnectWithLibrary extends homepage {
     public ArrayList<HashMap<String,String>> talks = new ArrayList<HashMap<String,String>>();
     String urlString = "", message = "", error = "", category = cats[0];
     ProgressBar spinner;
+    ScrollView commScroll;
+    RelativeLayout replyLayout,commMenu,convMenu;
+    TextView comm1,comm2,comm3,comm4;
     int[] comms = {R.id.comm1, R.id.comm2, R.id.comm3, R.id.comm4};
     int start = 0, catint = 1, total = 0;
     public final static String actString = "communication_panel";
@@ -65,7 +70,15 @@ public class ConnectWithLibrary extends homepage {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_communication_panel);
         spinner = (ProgressBar) findViewById(R.id.progressBar1);
+        commScroll = (ScrollView)findViewById(R.id.CommScroll);
+        replyLayout = (RelativeLayout)findViewById(R.id.replyLayout);
+        commMenu = (RelativeLayout)findViewById(R.id.commMenu);
+        convMenu = (RelativeLayout)findViewById(R.id.convMenu);
         convlist = (ListView) findViewById(R.id.convList);
+        comm1 = (TextView)findViewById(R.id.comm1);
+        comm2 = (TextView)findViewById(R.id.comm2);
+        comm3 = (TextView)findViewById(R.id.comm3);
+        comm4 = (TextView)findViewById(R.id.comm4);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         msg = (TextView) findViewById(R.id.message);
         drawerlayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -176,21 +189,20 @@ public class ConnectWithLibrary extends homepage {
         actionBarDrawerToggle.syncState();
         dbhandler = new DBHandler(this, null, null);
         setComm(true);
-        // Delete data after 2 months
     }
 
     public void setComm(Boolean update){
         id = "";
         spinner.setVisibility(View.VISIBLE);
         convlist.setVisibility(View.GONE);
-        findViewById(R.id.CommScroll).setVisibility(View.VISIBLE);
-        findViewById(R.id.replyLayout).setVisibility(View.GONE);
-        findViewById(R.id.commMenu).setVisibility(View.GONE);
-        findViewById(R.id.convMenu).setVisibility(View.GONE);
-        findViewById(R.id.comm1).setVisibility(View.GONE);
-        findViewById(R.id.comm2).setVisibility(View.GONE);
-        findViewById(R.id.comm3).setVisibility(View.GONE);
-        findViewById(R.id.comm4).setVisibility(View.GONE);
+        commScroll.setVisibility(View.VISIBLE);
+        replyLayout.setVisibility(View.GONE);
+        commMenu.setVisibility(View.GONE);
+        convMenu.setVisibility(View.GONE);
+        comm1.setVisibility(View.GONE);
+        comm2.setVisibility(View.GONE);
+        comm3.setVisibility(View.GONE);
+        comm4.setVisibility(View.GONE);
         if(update && isConnected()) {
             internal = dbhandler.selectData(0,"status like '%open%' and cat = '" + category + "' ORDER BY id ASC LIMIT 1");
             String id = "1";
@@ -203,6 +215,12 @@ public class ConnectWithLibrary extends homepage {
         else{
             printComms();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setComm(true);
     }
 
     public void setConv(){

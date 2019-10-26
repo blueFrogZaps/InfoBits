@@ -46,36 +46,38 @@ public class downloadable_links extends homepage implements  AdapterView.OnItemC
         switch (reference){
             case "Pearson e-Books":
                 values = new String[]{
-                       "Biology (5)" ,
-                        "Chemistry (9)",
-                        "Computer Science (117)",
-                        "Electrical and Electronic Engineering (15)",
-                        "Humanities and Social Sciences (26)",
-                        "Management (29)"
+                       "Biology" ,
+                        "Chemistry",
+                        "Computer Science",
+                        "Electrical and Electronic Engineering",
+                        "Humanities and Social Sciences",
+                        "Management"
                 };
                 links = new String[]{
-                        "http://www.bits-pilani.ac.in:12354/pdf/pearson_e-books/Biology.pdf",
-                        "http://www.bits-pilani.ac.in:12354/pdf/pearson_e-books/Chemistry.pdf",
-                        "http://www.bits-pilani.ac.in:12354/pdf/pearson_e-books/Computer_Science.pdf",
-                        "http://www.bits-pilani.ac.in:12354/pdf/pearson_e-books/Electrical_and_Electronic_Engineering.pdf",
-                        "http://www.bits-pilani.ac.in:12354/pdf/pearson_e-books/Humanities_and_Social_Sciences.pdf",
-                        "http://www.bits-pilani.ac.in:12354/pdf/pearson_e-books/Management.pdf"
+                        "http://172.21.1.15/pdf/pearson_e-books/Biology.pdf",
+                        "http://172.21.1.15/pdf/pearson_e-books/Chemistry.pdf",
+                        "http://172.21.1.15/pdf/pearson_e-books/Computer_Science.pdf",
+                        "http://172.21.1.15/pdf/pearson_e-books/Electrical_and_Electronic_Engineering.pdf",
+                        "http://172.21.1.15/pdf/pearson_e-books/Humanities_and_Social_Sciences.pdf",
+                        "http://172.21.1.15/pdf/pearson_e-books/Management.pdf"
                 };
                 break;
             case "Elsevier e-Books":
                 values = new String[]{
 
-                        "Chemical Engineering (10)",
-                        "Chemistry (3)",
-                        "Mathematics (16)",
-                        "Pharmacology, Toxicology and Pharmaceutical Science (13)"
+                        "Chemical Engineering",
+                        "Chemistry",
+                        "Mathematics",
+                        "Pharmacology, Toxicology and Pharmaceutical Science",
+                        "Computer Science and Information Systems"
 
                 };
                 links = new String[]{
-                        "http://www.bits-pilani.ac.in:12354/pdf/Elsevier_e-books/Chemical_Engineering.pdf",
-                        "http://www.bits-pilani.ac.in:12354/pdf/Elsevier_e-books/Chemistry.pdf",
-                        "http://www.bits-pilani.ac.in:12354/pdf/Elsevier_e-books/Mathematics.pdf",
-                        "http://www.bits-pilani.ac.in:12354/pdf/Elsevier_e-books/Pharmacology.pdf",
+                        "http://172.21.1.15/pdf/Elsevier_e-books/Chemical_Engineering.pdf",
+                        "http://172.21.1.15/pdf/Elsevier_e-books/Chemistry.pdf",
+                        "http://172.21.1.15/pdf/Elsevier_e-books/Mathematics.pdf",
+                        "http://172.21.1.15/pdf/Elsevier_e-books/Pharmacology.pdf",
+                        "http://172.21.1.15/pdf/Elsevier_e-books/CS-IS.pdf"
                 };
                 toolbar.setLogo(R.mipmap.science_direct1);
                 break;
@@ -104,7 +106,7 @@ public class downloadable_links extends homepage implements  AdapterView.OnItemC
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         if(i<values.length){
-            Uri uri = Uri.parse(links[i]);
+          //  Uri uri = Uri.parse(links[i]);
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(links[i]));
             startActivity(intent);
         }

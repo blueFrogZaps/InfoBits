@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -197,27 +198,31 @@ public class CommForms extends ConnectWithLibrary {
                     pub = ((EditText) findViewById(publishers[i])).getText().toString();
                     year = ((EditText) findViewById(years[i])).getText().toString();
                     if(title.isEmpty()){
-                        ((EditText) findViewById(titles[i])).setError("Title can't be empty");
+                        Toast.makeText(getApplicationContext(),"Title can't be empty",Toast.LENGTH_SHORT).show();
                         url = "";
                         i = reconum;
                     }
                     else if(author.isEmpty()){
-                        ((EditText) findViewById(authors[i])).setError("Author can't be empty");
+                        Toast.makeText(getApplicationContext(),"Author can't be empty",Toast.LENGTH_SHORT).show();
+                      //  ((EditText) findViewById(authors[i])).setError("Author can't be empty");
                         url = "";
                         i = reconum;
                     }
                     else if(edition.isEmpty()){
-                        ((EditText) findViewById(editions[i])).setError("Edition can't be empty");
+                        Toast.makeText(getApplicationContext(),"Edition can't be empty",Toast.LENGTH_SHORT).show();
+                       // ((EditText) findViewById(editions[i])).setError("Edition can't be empty");
                         url = "";
                         i = reconum;
                     }
                     else if(pub.isEmpty()){
-                        ((EditText) findViewById(publishers[i])).setError("Publisher can't be empty");
+                        Toast.makeText(getApplicationContext(),"Publisher can't be empty",Toast.LENGTH_SHORT).show();
+                       // ((EditText) findViewById(publishers[i])).setError("Publisher can't be empty");
                         url = "";
                         i = reconum;
                     }
                     else if(year.isEmpty()){
-                        ((EditText) findViewById(years[i])).setError("Year can't be empty");
+                        Toast.makeText(getApplicationContext(),"Year can't be empty",Toast.LENGTH_SHORT).show();
+                        //((EditText) findViewById(years[i])).setError("Year can't be empty");
                         url = "";
                         i = reconum;
                     }
@@ -233,6 +238,7 @@ public class CommForms extends ConnectWithLibrary {
                         }
                         inputArray.add(5 * i + 4, year);
                         url = url + "&inputArray[" + 5*i + "]=" + inputArray.get(5*i) + "&inputArray[" + (5*i + 1) + "]=" + inputArray.get(5*i + 1) + "&inputArray[" + (5*i + 2) + "]=" + inputArray.get(5*i + 2) + "&inputArray[" + (5*i + 3) + "]=" + inputArray.get(5*i + 3) + "&inputArray[" + (5*i + 4) +"]=" + inputArray.get(5*i + 4);
+                        Log.d("myTest",url);
                     }
                 }
                 break;
@@ -259,7 +265,6 @@ public class CommForms extends ConnectWithLibrary {
                             inputArray.add(3, URLEncoder.encode(accno, "UTF-8"));
                             url = urlString + "&cat=" + cat + "&inputArray[0]=" + inputArray.get(0) + "&inputArray[1]=" + inputArray.get(1) + "&inputArray[2]=" + inputArray.get(2) + "&inputArray[3]=" + inputArray.get(3);
                         } catch (UnsupportedEncodingException e) {
-                            //Toast.makeText(CommForms.this, e.getMessage(), Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
                     }
@@ -278,7 +283,6 @@ public class CommForms extends ConnectWithLibrary {
                             inputArray.add(3, URLEncoder.encode(year, "UTF-8"));
                             url = urlString + "&cat=" + cat + "&inputArray[0]=" + inputArray.get(0) + "&inputArray[1]=" + inputArray.get(1) + "&inputArray[2]=" + inputArray.get(2) + "&inputArray[3]=" + inputArray.get(3);
                         } catch (UnsupportedEncodingException e) {
-                            //Toast.makeText(CommForms.this, e.getMessage(), Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
                     }
@@ -303,7 +307,6 @@ public class CommForms extends ConnectWithLibrary {
                         inputArray.add(1, URLEncoder.encode(jour, "UTF-8"));
                         inputArray.add(2, URLEncoder.encode(loc, "UTF-8"));
                     } catch (UnsupportedEncodingException e) {
-                        //Toast.makeText(CommForms.this, e.getMessage(), Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
                     url = urlString + "&cat=" + cat + "&inputArray[0]=" + inputArray.get(0) + "&inputArray[1]=" + inputArray.get(1) + "&inputArray[2]=" + inputArray.get(2);
@@ -318,7 +321,6 @@ public class CommForms extends ConnectWithLibrary {
                             inputArray.add(0, URLEncoder.encode(serv, "UTF-8"));
                             inputArray.add(1, URLEncoder.encode(grieve, "UTF-8"));
                         } catch (UnsupportedEncodingException e) {
-                            //Toast.makeText(CommForms.this, e.getMessage(), Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
                         url = urlString + "&cat=" + cat + "&inputArray[0]=" + inputArray.get(0) + "&inputArray[1]=" + inputArray.get(1);
@@ -350,7 +352,6 @@ public class CommForms extends ConnectWithLibrary {
                         inputArray.add(1,URLEncoder.encode(author, "UTF-8"));
                         inputArray.add(2,URLEncoder.encode(review, "UTF-8"));
                     }catch(UnsupportedEncodingException e){
-                        //Toast.makeText(CommForms.this,e.getMessage(),Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
                     url = urlString + "&cat=" + cat + "&inputArray[0]=" + inputArray.get(0) + "&inputArray[1]=" + inputArray.get(1) + "&inputArray[2]=" + inputArray.get(2);
@@ -383,9 +384,9 @@ public class CommForms extends ConnectWithLibrary {
             if(cat == 1){
                 findViewById(R.id.commMenu).setVisibility(View.GONE);
             }
-            findViewById(R.id.CommForm).setVisibility(View.GONE);
-            progress.setVisibility(View.VISIBLE);
+           // findViewById(R.id.CommForm).setVisibility(View.GONE);
             if(!url.isEmpty()) {
+                progress.setVisibility(View.VISIBLE);
                 new APICall().execute(url);
             }
         }else{
@@ -428,10 +429,7 @@ public class CommForms extends ConnectWithLibrary {
                     e.printStackTrace();
                 }
                 updateInternalData(json, "new");
-//                Intent resultIntent = new Intent(CommForms.this,ConnectWithLibrary.class);
-//                resultIntent.putExtra("update", "yes");
-//                setResult(Activity.RESULT_OK, resultIntent);
-                finishActivity(Activity.RESULT_OK);
+                finish();
             }else{
                 if(cat == 1){
                     findViewById(R.id.commMenu).setVisibility(View.VISIBLE);
@@ -440,6 +438,7 @@ public class CommForms extends ConnectWithLibrary {
                 progress.setVisibility(View.GONE);
                 if(!err.isEmpty()){
                     Toast.makeText(CommForms.this,err,Toast.LENGTH_LONG).show();
+                    finish();
                 }
             }
         }

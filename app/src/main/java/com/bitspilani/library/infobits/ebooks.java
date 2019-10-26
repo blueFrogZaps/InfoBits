@@ -9,9 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.content.Intent;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bitspilani.library.infobits.R;
@@ -24,6 +27,8 @@ public class ebooks extends homepage{
 
     public Toolbar toolbar;
     Dialog dialog;
+
+
     @Override
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -57,10 +62,16 @@ public class ebooks extends homepage{
                 new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tandfebooks.com/page/openaccess#listofOAtitles")),
                 new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.oapen.org/search?sort=year;f1-language=English")),
                 new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.intechopen.com/books")),
+               /* new Intent(ebooks.this,LoadBooks.class).putExtra("url","http://open.umn.edu/opentextbooks/"),
+                new Intent(ebooks.this,LoadBooks.class).putExtra("url","http://link.springer.com/search/page/3?showAll=false&facet-content-type=%22Book%22"),
+                new Intent(ebooks.this,LoadBooks.class).putExtra("url","http://www.tandfebooks.com/page/openaccess#listofOAtitles"),
+                new Intent(ebooks.this,LoadBooks.class).putExtra("url","http://www.oapen.org/search?sort=year;f1-language=English"),
+                new Intent(ebooks.this,LoadBooks.class).putExtra("url","http://www.intechopen.com/books"),*/
                 new Intent(ebooks.this, downloadable_links.class).putExtra("reference", "Elsevier e-Books"),
-                new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.bits-pilani.ac.in:12354/pdf/EBSCO%20eBooks%20Mannual.pdf"))};
+                new Intent(Intent.ACTION_VIEW, Uri.parse("http://172.21.1.15/pdf/EBSCO%20eBooks%20Mannual.pdf"))};
         l.setAdapter(new MyAdapter(this, ebooks, ebookImages, links));
     }
+
 
     public class MyAdapter extends BaseAdapter {
 
@@ -94,7 +105,7 @@ public class ebooks extends homepage{
             v.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    startActivity(link[position]);
+                        startActivity(link[position]);
                 }
             });
             return v;

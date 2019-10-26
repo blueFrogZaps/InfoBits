@@ -31,7 +31,11 @@ public class CustomAdapter extends BaseAdapter{
     public CustomAdapter(Context c, String[] prgmNameList, String[] prgmImages, String[] prgmLinks) {
         // TODO Auto-generated constructor stub
         result = prgmNameList;
+        for(int i = 0;i<prgmNameList.length;i++)
+            System.out.println("NAME: "+i+":"+prgmNameList[i]);
         links = prgmLinks;
+        for(int i = 0;i<prgmLinks.length;i++)
+            System.out.println("LINKS "+i+":"+prgmLinks[i]);
         context = c;
         imageUrl = prgmImages;
     }
@@ -39,7 +43,9 @@ public class CustomAdapter extends BaseAdapter{
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return result.length;
+        if(result!=null)
+          return result.length;
+         return 0;
     }
 
     @Override
@@ -76,14 +82,15 @@ public class CustomAdapter extends BaseAdapter{
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        rowView.setOnClickListener(new View.OnClickListener(){
+       /* rowView.setOnClickListener(new View.OnClickListener(){
             int position = pos;
             @Override
             public void onClick(View view) {
+                System.out.println("URL: "+pos+":"+links[pos]);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(links[pos]));
                 context.startActivity(browserIntent);
             }
-        });
+        });*/
         return rowView;
     }
 

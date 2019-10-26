@@ -484,5 +484,3 @@ public class user_settings extends homepage implements View.OnClickListener {
         startActivityForResult(Intent.createChooser(galleryIntent, "Select Picture"), RESULT_LOAD_IMAGE);
     }
 }
-
-
