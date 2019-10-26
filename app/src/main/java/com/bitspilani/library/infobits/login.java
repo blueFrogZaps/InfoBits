@@ -97,6 +97,7 @@ public class login extends homepage {
         if(isConnected()) {
             Intent browserIntent =new Intent(login.this,LoadBooks.class).putExtra("url","http://172.21.1.15/account/forgot.php");
             startActivity(browserIntent);
+
         }
     }
 
@@ -193,6 +194,7 @@ public class login extends homepage {
 
 @SuppressLint("StaticFieldLeak")
 private class LoadImage extends AsyncTask<String, String, Bitmap> {
+
 
         Bitmap bitmap;
         String filename;
