@@ -33,7 +33,7 @@
                     android:id="@+id/profile"
                     android:padding="10dp"
                     android:visibility="visible"
-                    android:src="@mipmap/logo"
+                    android:src="@drawable/account"
                     android:layout_gravity="center_horizontal" />
 
                 <ImageButton

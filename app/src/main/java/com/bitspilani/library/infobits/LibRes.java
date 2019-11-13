@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bitspilani.library.infobits.R;
@@ -25,6 +26,7 @@ public class LibRes extends homepage{
     DrawerLayout drawerlayout;
     NavigationView navigationView;
     MenuItem cat;
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class LibRes extends homepage{
         setSupportActionBar(toolbar);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
+        spinner = (ProgressBar) findViewById(R.id.progressBarRes);
         cat = navigationView.getMenu().getItem(0);
         cat.setChecked(true);
         View v = findViewById(R.id.libricons);
@@ -69,6 +72,12 @@ public class LibRes extends homepage{
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        spinner.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         super.onNavigationItemSelected(item);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -77,11 +86,13 @@ public class LibRes extends homepage{
     }
 
     public void onClickOD(View view) {
+        spinner.setVisibility(View.VISIBLE);
         Intent i = new Intent(LibRes.this, OnlineDb.class);
         startActivity(i);
     }
 
     public void onClickEB(View view) {
+        spinner.setVisibility(View.VISIBLE);
         Intent i = new Intent(LibRes.this, ebooks.class);
         startActivity(i);
     }
@@ -94,6 +105,7 @@ public class LibRes extends homepage{
     }
 
     public void onClickIR(View view) {
+        spinner.setVisibility(View.VISIBLE);
         Intent browserIntent = new Intent(LibRes.this,LoadBooks.class).putExtra("url","http://eprints.bits-pilani.ac.in/");
         startActivity(browserIntent);
     }

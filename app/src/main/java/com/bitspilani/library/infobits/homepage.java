@@ -67,29 +67,28 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
     Toolbar toolbar;
     ViewPager viewPager;
-  //  Swipe_Adapter adapter;
+    Swipe_Adapter adapter;
     DrawerLayout drawerlayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     DBHandler dbhandler;
     JSONObject internal;
-    ProgressBar resPBar;
+    private ProgressBar resPBar;
     Button reserveB;
-    ArrayList<RadioButton> pagination = new ArrayList<>();
+ //   ArrayList<RadioButton> pagination = new ArrayList<>();
     ArrayList<String> urls = new ArrayList<>();
     ArrayList<Bitmap> images = new ArrayList<>();
     MenuItem cat;
-    RadioGroup pagin;
+   // RadioGroup pagin;
     SharedPreferences login_info;
     SharedPreferences.Editor edit_login_info;
     Map<String, ?> user;
-    ProgressBar spinner;
+    private ProgressBar spinner;
     public static String username, name, password, usercat, email, avatar;
     public static FileInputStream fileInput = null;
     public final static String apiURL = "http://172.21.1.15/apis/";
     public final static String imageApiURL = "http://172.21.1.15/uploads/";
 //    public final static String apiURL = "http://192.168.43.71:80/infoBITS/apis/";
 //    public final static String imageApiURL = "http://192.168.43.71:80/infoBITS/uploads/";
-
     File dir;
     private GoogleApiClient client;
 
@@ -159,8 +158,8 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         }
         dbhandler = new DBHandler(this, null, null);
         internal = dbhandler.selectData(2, "1 ORDER BY id ASC");
-        /*if (viewPager.getAdapter() == null)
-            getNotices();*/
+        if (viewPager.getAdapter() == null)
+            getNotices();
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
@@ -292,6 +291,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         if (user.isEmpty()) {
             LogInToast();
         } else {
+            //spinner.setVisibility(View.VISIBLE);
             Intent i = new Intent(homepage.this, DailyNews.class);
             startActivity(i);
         }
@@ -301,6 +301,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         if (user.isEmpty()) {
             LogInToast();
         } else {
+           // spinner.setVisibility(View.VISIBLE);
             Intent browserIntent = new Intent(homepage.this,LoadBooks.class).putExtra("url","http://172.21.1.37");
             startActivity(browserIntent);
         }
@@ -310,6 +311,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         if (user.isEmpty()) {
             LogInToast();
         } else {
+            //spinner.setVisibility(View.VISIBLE);
             Intent i = new Intent(homepage.this, ConnectWithLibrary.class);
             startActivity(i);
         }
@@ -325,6 +327,121 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
     }
 
 
+    public void getNotices() {
+        urls.clear();
+        images.clear();
+        JSONObject botw = dbhandler.selectData(3, "1");
+        // Log.d("myTest","BOTW"+botw.toString());
+        JSONObject newsjson = dbhandler.selectData(1, "1 ORDER BY id DESC LIMIT 0,3");
+        //  Log.d("myTest","NEWS"+newsjson.toString());
+        Iterator botwiter = botw.keys();
+        JSONObject botwjson;
+        String[] botwarr = {"", "", ""}, news = {"", "", ""};
+        internal = dbhandler.selectData(2, "1 ORDER BY id ASC");
+      //  Log.d("myTest","INTERNAL: "+internal.toString());
+        Iterator iter = internal.keys();
+        Iterator newsiter = newsjson.keys();
+        File image;
+        FileInputStream fileInput;
+        try {
+            String url = "";
+            if (botwiter.hasNext()) {
+                String botwkey = botwiter.next().toString();
+                botwjson = (JSONObject) botw.get(botwkey);
+                botwarr[0] = botwjson.get("title").toString();
+                botwarr[1] = botwjson.get("author").toString();
+                botwarr[2] = botwjson.get("image").toString();
+            }
+            image = new File(dir, botwarr[2]);
+            fileInput = new FileInputStream(image);
+            images.add(BitmapFactory.decodeStream(fileInput));
+            fileInput.close();
+            while (iter.hasNext()) {
+                String key = iter.next().toString();
+                JSONObject data = (JSONObject) internal.get(key);
+                image = new File(dir, data.get("image").toString());
+                fileInput = new FileInputStream(image);
+                images.add(BitmapFactory.decodeStream(fileInput));
+                try {
+                    url = URLDecoder.decode(data.get("link").toString(), "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                Boolean m = Pattern.compile("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$").matcher(url).find();
+                if (!url.isEmpty()) {
+                    if (url.contains("http://")) {
+                        if (!url.contains("www.")) {
+                            if (!m) {
+                                url = "http://www." + url.substring(url.indexOf("http://") + 7);
+                            }
+                        }
+                    } else {
+                        if (url.contains("www.") || m) {
+                            url = "http://" + url;
+                        } else {
+                            url = "http:" + url;
+                        }
+                    }
+                }
+                urls.add(url);
+                fileInput.close();
+            }
+            int i = 0;
+            while (newsiter.hasNext()) {
+                JSONObject newsitem = (JSONObject) newsjson.get(newsiter.next().toString());
+                news[i] = newsitem.get("title").toString() + "," + newsitem.get("newspaper").toString() + ", pg. " + newsitem.get("pages").toString();
+                i++;
+            }
+            if (internal.length() == 0 && botw.length() == 0) {
+                findViewById(R.id.view_pager).setVisibility(View.GONE);
+                findViewById(R.id.no_notice).setVisibility(View.VISIBLE);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //((TextView) findViewById(R.id.textView14)).setText(news[0]);
+        adapter = new Swipe_Adapter(this, images, urls, botwarr, news);
+        if (adapter.getCount() == 0) {
+            findViewById(R.id.no_notice).setVisibility(View.VISIBLE);
+            viewPager.setVisibility(View.GONE);
+           // findViewById(R.id.pagination).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.no_notice).setVisibility(View.GONE);
+            viewPager.setAdapter(adapter);
+            viewPager.setVisibility(View.VISIBLE);
+          //  pagin = (RadioGroup) findViewById(R.id.paginationGroup);
+           // pagin.clearCheck();
+            for (int i = 0; i < adapter.getCount(); i++) {
+                RadioButton rbtn = new RadioButton(this);
+                rbtn.setText("");
+                if (Build.VERSION.SDK_INT >= 21)
+                    rbtn.setButtonTintList(this.getResources().getColorStateList(R.color.colorPrimaryDark));
+                else if (Build.VERSION.SDK_INT >= 23)
+                    rbtn.setButtonTintList(this.getResources().getColorStateList(R.color.colorPrimaryDark, this.getTheme()));
+                rbtn.setChecked(false);
+                rbtn.setClickable(false);
+          //      pagin.addView(rbtn, i, pagin.getLayoutParams());
+           //     pagination.add(i, rbtn);
+            }
+         //   pagination.get(0).setChecked(true);
+        //    findViewById(R.id.pagination).setVisibility(View.VISIBLE);
+            viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    super.onPageSelected(position);
+//                    pagin.clearCheck();
+  //                  pagination.get(position).setChecked(true);
+                }
+            });
+        }
+    }
 
     @Override
     public void onStart() {
@@ -358,7 +475,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         client.disconnect();
     }
 
-    /*public class Swipe_Adapter extends PagerAdapter {
+    public class Swipe_Adapter extends PagerAdapter {
         private ArrayList<Bitmap> image_resources = new ArrayList<>();
         private ArrayList<String> urls = new ArrayList<>();
         private String[] botw;
@@ -544,8 +661,12 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
                             public void onClick(View v) {
                                 String url = urls.get(viewPager.getCurrentItem() - 1);
                                 if (!url.isEmpty()) {
+                                    /*
+                                    * Intent browserIntent = new Intent(LibRes.this,LoadBooks.class).putExtra("url","http://eprints.bits-pilani.ac.in/");
+                                        startActivity(browserIntent);*/
+                                    Log.d("myTest",url.toString());
                                     Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse(url));
-                                    startActivity(browserIntent);
+                                   // startActivity(browserIntent);
                                 }
                             }
                         });
@@ -560,7 +681,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((RelativeLayout) object);
         }
-    }*/
+    }
 
     private class APICall extends AsyncTask<String, Integer, String> {
 

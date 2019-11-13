@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bitspilani.library.infobits.homepage"
+
     android:id="@+id/drawer_layout">
 
 
@@ -23,6 +23,19 @@
 
         </android.support.v7.widget.Toolbar>
 
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/progressBarService"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+            android:progressTint="@color/colorPrimaryDark"
+            android:progressTintMode="src_in"
+            android:indeterminate="false"
+            tools:targetApi="lollipop" />
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -37,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/imgbt_info"
                 android:src="@mipmap/cwl"
-                android:onClick="onClickCWL"
+                android:onClick="onClickConnWL"
                 android:background="#e0dfeb"
                 android:layout_margin="12dp"
                 android:scaleType="centerCrop" />
@@ -47,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/imgbt_news"
                 android:src="@mipmap/dn"
-                android:onClick="onClickDN"
+                android:onClick="onClickDNews"
                 android:clickable="true"
                 android:background="#e0dfeb"
                 android:scaleType="centerCrop"
@@ -84,18 +97,12 @@
 
     <android.support.design.widget.NavigationView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/navigation_view"
         android:layout_gravity="start"
         app:menu="@menu/drawer_menu"
         app:headerLayout="@layout/navigation_drawer_header"
         >
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tag"
-            android:layout_marginTop="517dp"
-            android:src="@drawable/tag" />
     </android.support.design.widget.NavigationView>
 
 

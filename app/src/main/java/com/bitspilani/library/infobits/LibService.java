@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bitspilani.library.infobits.R;
@@ -24,6 +25,7 @@ public class LibService extends homepage {
     DrawerLayout drawerlayout;
     NavigationView navigationView;
     MenuItem cat;
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,12 @@ public class LibService extends homepage {
         drawerlayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         setSupportActionBar(toolbar);
+        spinner = (ProgressBar) findViewById(R.id.progressBarService);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
         cat = navigationView.getMenu().getItem(0);
         cat.setChecked(true);
+
         View v = findViewById(R.id.libricons);
         Integer[] icons = new Integer[]{R.id.imgbt_info, R.id.imgbt_news, R.id.imgbt_service4, R.id.imgbt_service5};
         Integer[] dimens = getDimens();
@@ -68,6 +72,11 @@ public class LibService extends homepage {
         drawerlayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        spinner.setVisibility(View.INVISIBLE);
+    }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -82,6 +91,7 @@ public class LibService extends homepage {
             LogInToast();
         }
         else{
+            spinner.setVisibility(View.VISIBLE);
             Intent i = new Intent(LibService.this, lfmsAllItems.class);
             startActivity(i);
         }
@@ -92,7 +102,27 @@ public class LibService extends homepage {
             LogInToast();
         }
         else{
+            spinner.setVisibility(View.VISIBLE);
             Intent i = new Intent(LibService.this, infoBitsBulletin.class);
+            startActivity(i);
+        }
+    }
+
+    public void onClickConnWL(View view) {
+        if (user.isEmpty()) {
+            LogInToast();
+        } else {
+            spinner.setVisibility(View.VISIBLE);
+            Intent i = new Intent(LibService.this, ConnectWithLibrary.class);
+            startActivity(i);
+        }
+    }
+    public void onClickDNews(View view) {
+        if (user.isEmpty()) {
+            LogInToast();
+        } else {
+            spinner.setVisibility(View.VISIBLE);
+            Intent i = new Intent(LibService.this, DailyNews.class);
             startActivity(i);
         }
     }

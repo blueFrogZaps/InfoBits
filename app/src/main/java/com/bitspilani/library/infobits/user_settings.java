@@ -105,7 +105,7 @@ public class user_settings extends homepage implements View.OnClickListener {
             e.printStackTrace();
         }
         if(fileInput == null){
-            image.setImageResource(R.mipmap.logo);
+            image.setImageResource(R.drawable.bits);
         }else{
             image.setImageBitmap(BitmapFactory.decodeStream(fileInput));
             setToolBarAvatar(profilepic);
@@ -287,7 +287,7 @@ public class user_settings extends homepage implements View.OnClickListener {
                                 e.printStackTrace();
                             }
                             if(fileInput == null){
-                                image.setImageResource(R.mipmap.logo);
+                                image.setImageResource(R.drawable.bits);
                             }else{
                                 image.setImageBitmap(BitmapFactory.decodeStream(fileInput));
                             }

@@ -40,7 +40,6 @@ public class Cover extends AppCompatActivity {
     public final static String imageApiURL = "http://172.21.1.15/uploads/";
    // public final static String apiURL = "http://192.168.43.71:80/infoBITS/apis/";
   //  public final static String imageApiURL = "http://192.168.43.71:80/infoBITS/uploads/";
-
     String actString = "notices";
     int imgs;
     ProgressBar spinner;
@@ -303,13 +302,13 @@ public class Cover extends AppCompatActivity {
 
     public void launchHome(){
         new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        Intent i = new Intent(Cover.this, homepage.class);
-                        startActivity(i);
-                        finish();
-                    }
-                }, 3000
+            new Runnable() {
+                public void run() {
+                    Intent i = new Intent(Cover.this, homepage.class);
+                    startActivity(i);
+                    finish();
+                }
+            }, 3000
         );
     }
 }
