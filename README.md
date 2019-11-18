@@ -42,11 +42,9 @@ Get a list of new arrivals of books and journals.
  - [x] Null Checks and Crashes in infoBitsBulletin
  - [x] Improved Connect with library feature
  - [x] Updated Databases and E-books
- - [X] Fixed UI Errors
- </br>
- 
- - [ ] Implement notice board.
- 
+ - [X] Fixed UI Errors 
+ - [X] Implement notice board.
+  </br>
  ----
  **Link to infoBITS website:** [BITS Pilani Library](http://172.21.1.15/ "infoBITS") 
  
