@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 28
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.bitspilani.library.infobits"
+        applicationId "com.bitspilani.library.infoBits"
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }

@@ -19,3 +19,6 @@ app/build.gradle
 app/proguard-rules.pro
 app/src/test
 app/src/androidTest
+app-relaease.jks
+app/debug
+app/release
