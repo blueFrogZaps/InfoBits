@@ -178,6 +178,7 @@ public class user_settings extends homepage implements View.OnClickListener {
                         .setAction("Action", null).show();
                 if (isConnected()) {
                     spinner.setVisibility(View.VISIBLE);
+                    //Not getting uploaded
                     uploadImage();
                 } else {
                     Toast.makeText(getApplicationContext(), "Not Connected to BITS Intranet!", Toast.LENGTH_LONG).show();
