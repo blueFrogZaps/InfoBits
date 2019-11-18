@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class lfmsAllItems extends homepage {
     TextView msg;
     DBHandler dbhandler;
     JSONObject internal;
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class lfmsAllItems extends homepage {
         lv = (ListView) findViewById(R.id.list);
         msg = (TextView) findViewById(R.id.message);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        spinner = (ProgressBar) findViewById(R.id.progressBarClaim);
         setSupportActionBar(toolbar);
         File profilepic = new File(dir, avatar);
         try {
@@ -66,6 +69,13 @@ public class lfmsAllItems extends homepage {
             setList(internal);
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        spinner.setVisibility(View.INVISIBLE);
+    }
+
 
     private class APICall extends AsyncTask<String,Integer,String> {
 
@@ -114,8 +124,18 @@ public class lfmsAllItems extends homepage {
                 }
                 setList(internal);
             }
-            if (pDialog != null)
-                pDialog.dismiss();
+            //pDialog
+            try {
+                if ((pDialog != null) && pDialog.isShowing()) {
+                    pDialog.dismiss();
+                }
+            } catch (final IllegalArgumentException e) {
+                // Handle or log or ignore
+            } catch (final Exception e) {
+                // Handle or log or ignore
+            } finally {
+                pDialog = null;
+            }
         }
     }
 
@@ -220,6 +240,7 @@ public class lfmsAllItems extends homepage {
                     v.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            spinner.setVisibility(View.VISIBLE);
                             Intent in = new Intent(getApplicationContext(), Claim.class);
                             in.putExtra("sno", i.get("sno").toString());
                             startActivityForResult(in, 100);

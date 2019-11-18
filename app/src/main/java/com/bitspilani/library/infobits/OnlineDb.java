@@ -33,10 +33,11 @@ public class OnlineDb extends homepage {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent defaultIntent;
-                if(DbLinks[position].contains("pdf"))
+                defaultIntent = new Intent(Intent.ACTION_VIEW,Uri.parse(DbLinks[position]));
+               /* if(DbLinks[position].contains("pdf"))
                     defaultIntent = new Intent(Intent.ACTION_VIEW,Uri.parse(DbLinks[position]));
                 else
-                    defaultIntent = new Intent(OnlineDb.this,LoadBooks.class).putExtra("url",DbLinks[position]);
+                    defaultIntent = new Intent(OnlineDb.this,LoadBooks.class).putExtra("url",DbLinks[position]);*/
                 startActivity(defaultIntent);
             }
         });

@@ -30,7 +30,9 @@ public class MyFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 System.out.println("POSITION: "+position);
-                Intent browserIntent = new Intent(getContext(),LoadBooks.class).putExtra("url",bookLinks[position]);
+                Intent browserIntent =
+                        new Intent(Intent.ACTION_VIEW, Uri.parse(bookLinks[position]));
+                        //new Intent(getContext(),LoadBooks.class).putExtra("url",bookLinks[position]);
                 startActivity(browserIntent);
             }
         });
@@ -38,7 +40,8 @@ public class MyFragment extends Fragment{
         journals.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent browserIntent = new Intent(getContext(),LoadBooks.class).putExtra("url",journalLinks[position]);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(journalLinks[position]));
+                        //new Intent(getContext(),LoadBooks.class).putExtra("url",journalLinks[position]);
                 startActivity(browserIntent);
             }
         });

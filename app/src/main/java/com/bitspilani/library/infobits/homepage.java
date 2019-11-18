@@ -97,6 +97,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
         login_info = getSharedPreferences("login_info", Context.MODE_PRIVATE);
+
         edit_login_info = login_info.edit();
         user = login_info.getAll();
         if (!user.isEmpty()) {
@@ -302,7 +303,8 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
             LogInToast();
         } else {
            // spinner.setVisibility(View.VISIBLE);
-            Intent browserIntent = new Intent(homepage.this,LoadBooks.class).putExtra("url","http://172.21.1.37");
+            Intent browserIntent =  new Intent(Intent.ACTION_VIEW,Uri.parse("http://172.21.1.37"));
+                    //new Intent(homepage.this,LoadBooks.class).putExtra("url","http://172.21.1.37");
             startActivity(browserIntent);
         }
     }
@@ -416,10 +418,11 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
             for (int i = 0; i < adapter.getCount(); i++) {
                 RadioButton rbtn = new RadioButton(this);
                 rbtn.setText("");
-                if (Build.VERSION.SDK_INT >= 21)
+                /*if (Build.VERSION.SDK_INT >= 21)
                     rbtn.setButtonTintList(this.getResources().getColorStateList(R.color.colorPrimaryDark));
                 else if (Build.VERSION.SDK_INT >= 23)
                     rbtn.setButtonTintList(this.getResources().getColorStateList(R.color.colorPrimaryDark, this.getTheme()));
+                */
                 rbtn.setChecked(false);
                 rbtn.setClickable(false);
           //      pagin.addView(rbtn, i, pagin.getLayoutParams());
@@ -781,4 +784,6 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         Drawable dr = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, w, h, true));
         toolbar.setOverflowIcon(dr);
     }
+
+
 }

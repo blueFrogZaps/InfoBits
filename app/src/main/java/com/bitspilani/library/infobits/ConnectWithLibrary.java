@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -43,6 +44,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class ConnectWithLibrary extends homepage {
 
@@ -105,87 +107,111 @@ public class ConnectWithLibrary extends homepage {
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerlayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerlayout.setDrawerListener(actionBarDrawerToggle);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(ConnectWithLibrary.this, CommForms.class);
-                Bundle b = new Bundle();
-                b.putInt("cat", catint);
-                i.putExtras(b);
-                startActivityForResult(i, 1);
-            }
-        });
+        if (fab != null) {
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(ConnectWithLibrary.this, CommForms.class);
+                    Bundle b = new Bundle();
+                    b.putInt("cat", catint);
+                    i.putExtras(b);
+                    startActivityForResult(i, 1);
+                }
+            });
+        }
         FloatingActionButton prev = (FloatingActionButton) findViewById(R.id.prev);
-        prev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (start > 0) {
-                    start = start - 4;
-                    printComms();
+        if (prev != null) {
+            prev.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (start > 0) {
+                        start = start - 4;
+                        printComms();
+                    }
                 }
-            }
-        });
+            });
+        }
         FloatingActionButton next = (FloatingActionButton) findViewById(R.id.next);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (total > start + 4) {
-                    start = start + 4;
-                    printComms();
+        if (next != null) {
+            next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (total > start + 4) {
+                        start = start + 4;
+                        printComms();
+                    }
                 }
-            }
-        });
+            });
+        }
         FloatingActionButton back = (FloatingActionButton) findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setComm(false);
-            }
-        });
+        if (back != null) {
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setComm(false);
+                }
+            });
+        }
         FloatingActionButton reply = (FloatingActionButton) findViewById(R.id.reply);
-        reply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (status.equals("open")) {
-                    findViewById(R.id.replyLayout).setVisibility(View.VISIBLE);
-                } else {
-                    Toast.makeText(ConnectWithLibrary.this, "The conversation has been terminated by Administrator", Toast.LENGTH_LONG).show();
+        if (reply != null) {
+            reply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (status.equals("open")) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                            Objects.requireNonNull(findViewById(R.id.replyLayout)).setVisibility(View.VISIBLE);
+                        }
+                    } else {
+                        Toast.makeText(ConnectWithLibrary.this, "The conversation has been terminated by Administrator", Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
-        });
+            });
+        }
         FloatingActionButton send = (FloatingActionButton) findViewById(R.id.send);
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String replied = ((EditText) findViewById(R.id.replyText)).getText().toString().replace(" ", "%20");
-                try {
-                    urlString = apiURL + actString + ".php?username=" + username + "&password=" + password + "&action=reply&id=" + id + "&cat=" + catint + "&reply=" + URLEncoder.encode(replied, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    Toast.makeText(ConnectWithLibrary.this, e.getMessage(), Toast.LENGTH_LONG).show();
+        if (send != null) {
+            send.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String replied = null;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        replied = ((EditText) Objects.requireNonNull(findViewById(R.id.replyText))).getText().toString().replace(" ", "%20");
+                    }
+                    try {
+                        urlString = apiURL + actString + ".php?username=" + username + "&password=" + password + "&action=reply&id=" + id + "&cat=" + catint + "&reply=" + URLEncoder.encode(replied, "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        Toast.makeText(ConnectWithLibrary.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                    if (isConnected()) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                            Objects.requireNonNull(findViewById(R.id.convList)).setVisibility(View.GONE);
+                            Objects.requireNonNull(findViewById(R.id.convMenu)).setVisibility(View.GONE);
+                            Objects.requireNonNull(findViewById(R.id.replyLayout)).setVisibility(View.GONE);
+                        }
+                        spinner.setVisibility(View.VISIBLE);
+                        new APICall().execute(urlString);
+                    }
                 }
-                if (isConnected()) {
-                    findViewById(R.id.convList).setVisibility(View.GONE);
-                    findViewById(R.id.convMenu).setVisibility(View.GONE);
-                    findViewById(R.id.replyLayout).setVisibility(View.GONE);
-                    spinner.setVisibility(View.VISIBLE);
-                    new APICall().execute(urlString);
-                }
-            }
-        });
+            });
+        }
         FloatingActionButton delete = (FloatingActionButton) findViewById(R.id.delete);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                urlString = apiURL + actString + ".php?username=" + username + "&password=" + password + "&action=delete&id=" + id + "&cat=" + catint;
-                if (isConnected()) {
-                    findViewById(R.id.convList).setVisibility(View.GONE);
-                    findViewById(R.id.convMenu).setVisibility(View.GONE);
-                    findViewById(R.id.replyLayout).setVisibility(View.GONE);
-                    spinner.setVisibility(View.VISIBLE);
-                    new APICall().execute(urlString);
+        if (delete != null) {
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    urlString = apiURL + actString + ".php?username=" + username + "&password=" + password + "&action=delete&id=" + id + "&cat=" + catint;
+                    if (isConnected()) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                            Objects.requireNonNull(findViewById(R.id.convList)).setVisibility(View.GONE);
+                            Objects.requireNonNull(findViewById(R.id.convMenu)).setVisibility(View.GONE);
+                            Objects.requireNonNull(findViewById(R.id.replyLayout)).setVisibility(View.GONE);
+                        }
+
+                        spinner.setVisibility(View.VISIBLE);
+                        new APICall().execute(urlString);
+                    }
                 }
-            }
-        });
+            });
+        }
         actionBarDrawerToggle.syncState();
         dbhandler = new DBHandler(this, null, null);
         setComm(true);
@@ -224,10 +250,13 @@ public class ConnectWithLibrary extends homepage {
     }
 
     public void setConv(){
-        findViewById(R.id.replyLayout).setVisibility(View.GONE);
-        findViewById(R.id.CommScroll).setVisibility(View.GONE);
-        findViewById(R.id.commMenu).setVisibility(View.GONE);
-        findViewById(R.id.convMenu).setVisibility(View.VISIBLE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Objects.requireNonNull(findViewById(R.id.replyLayout)).setVisibility(View.GONE);
+            Objects.requireNonNull(findViewById(R.id.CommScroll)).setVisibility(View.GONE);
+            Objects.requireNonNull(findViewById(R.id.commMenu)).setVisibility(View.GONE);
+            Objects.requireNonNull(findViewById(R.id.convMenu)).setVisibility(View.VISIBLE);
+        }
+
         MyAdapter adapter = new MyAdapter(this, talks,
                 android.R.layout.two_line_list_item,
                 new String[] { "info","talk" },
@@ -382,9 +411,12 @@ public class ConnectWithLibrary extends homepage {
                     message = "";
                 }
                 else{
-                    findViewById(R.id.convList).setVisibility(View.VISIBLE);
-                    findViewById(R.id.convMenu).setVisibility(View.VISIBLE);
-                    findViewById(R.id.replyLayout).setVisibility(View.VISIBLE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        Objects.requireNonNull(findViewById(R.id.convList)).setVisibility(View.VISIBLE);
+                        Objects.requireNonNull(findViewById(R.id.convMenu)).setVisibility(View.VISIBLE);
+                        Objects.requireNonNull(findViewById(R.id.replyLayout)).setVisibility(View.VISIBLE);
+                    }
+
                     error = "";
                 }
             }
@@ -398,9 +430,12 @@ public class ConnectWithLibrary extends homepage {
                     getConv(data.get("talk").toString(),data.get("admins").toString());
                 }
                 else{
-                    findViewById(R.id.convList).setVisibility(View.VISIBLE);
-                    findViewById(R.id.convMenu).setVisibility(View.VISIBLE);
-                    findViewById(R.id.replyLayout).setVisibility(View.VISIBLE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        Objects.requireNonNull(findViewById(R.id.convList)).setVisibility(View.VISIBLE);
+                        Objects.requireNonNull(findViewById(R.id.convMenu)).setVisibility(View.VISIBLE);
+                        Objects.requireNonNull(findViewById(R.id.replyLayout)).setVisibility(View.VISIBLE);
+                    }
+
                     error = "";
                 }
             }
@@ -464,9 +499,12 @@ public class ConnectWithLibrary extends homepage {
                     printComms();
                 }
                 else{
-                    findViewById(R.id.convList).setVisibility(View.VISIBLE);
-                    findViewById(R.id.convMenu).setVisibility(View.VISIBLE);
-                    findViewById(R.id.replyLayout).setVisibility(View.VISIBLE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        Objects.requireNonNull(findViewById(R.id.convList)).setVisibility(View.VISIBLE);
+                        Objects.requireNonNull(findViewById(R.id.convMenu)).setVisibility(View.VISIBLE);
+                        Objects.requireNonNull(findViewById(R.id.replyLayout)).setVisibility(View.VISIBLE);
+                    }
+
                 }
             }
         }
@@ -475,28 +513,38 @@ public class ConnectWithLibrary extends homepage {
     public void printComms(){
         id = "";
         spinner.setVisibility(View.GONE);
-        findViewById(R.id.message).setVisibility(View.GONE);
-        findViewById(R.id.commMenu).setVisibility(View.VISIBLE);
-        findViewById(R.id.CommScroll).setVisibility(View.VISIBLE);
-        convlist.setVisibility(View.GONE);
-        findViewById(R.id.replyLayout).setVisibility(View.GONE);
-        findViewById(R.id.convMenu).setVisibility(View.GONE);
-        findViewById(R.id.comm1).setVisibility(View.GONE);
-        findViewById(R.id.comm2).setVisibility(View.GONE);
-        findViewById(R.id.comm3).setVisibility(View.GONE);
-        findViewById(R.id.comm4).setVisibility(View.GONE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Objects.requireNonNull(findViewById(R.id.message)).setVisibility(View.GONE);
+            Objects.requireNonNull(findViewById(R.id.commMenu)).setVisibility(View.VISIBLE);
+            Objects.requireNonNull(findViewById(R.id.CommScroll)).setVisibility(View.VISIBLE);
+            Objects.requireNonNull(findViewById(R.id.replyLayout)).setVisibility(View.GONE);
+            Objects.requireNonNull(findViewById(R.id.convMenu)).setVisibility(View.GONE);
+            Objects.requireNonNull(findViewById(R.id.comm1)).setVisibility(View.GONE);
+            Objects.requireNonNull(findViewById(R.id.comm2)).setVisibility(View.GONE);
+            Objects.requireNonNull(findViewById(R.id.comm3)).setVisibility(View.GONE);
+            Objects.requireNonNull(findViewById(R.id.comm4)).setVisibility(View.GONE);
+        }
+         convlist.setVisibility(View.GONE);
         total = dbhandler.getNum(0,"status not like '%inactive%' and cat like '%" + category + "%'");
         if(start > 0){
-            findViewById(R.id.prev).setClickable(true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                Objects.requireNonNull(findViewById(R.id.prev)).setClickable(true);
+            }
         }
         else{
-            findViewById(R.id.prev).setClickable(false);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                Objects.requireNonNull(findViewById(R.id.prev)).setClickable(false);
+            }
         }
         if(total > start + 4){
-            findViewById(R.id.next).setClickable(true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                Objects.requireNonNull(findViewById(R.id.next)).setClickable(true);
+            }
         }
         else{
-            findViewById(R.id.next).setClickable(false);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                Objects.requireNonNull(findViewById(R.id.next)).setClickable(false);
+            }
         }
 
         JSONObject dispjson = dbhandler.selectData(0, "status not like '%inactive%' and cat like '%" + category + "%' ORDER BY status desc, id desc LIMIT " + start + ",4");
@@ -511,8 +559,12 @@ public class ConnectWithLibrary extends homepage {
                     if(!data.get("admins").toString().isEmpty()) {
                         text = text + "\n" + data.get("admins").toString();
                     }
-                    findViewById(comms[i]).setVisibility(View.VISIBLE);
-                    ((TextView) findViewById(comms[i])).setText(text);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        Objects.requireNonNull(findViewById(comms[i])).setVisibility(View.VISIBLE);
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        ((TextView) Objects.requireNonNull(findViewById(comms[i]))).setText(text);
+                    }
                 }
             }
             else{
@@ -538,7 +590,9 @@ public class ConnectWithLibrary extends homepage {
             category = cats[catint - 1];
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        if (drawer != null) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
         setComm(true);
         return true;
     }
@@ -564,14 +618,16 @@ public class ConnectWithLibrary extends homepage {
         if (this.drawerlayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerlayout.closeDrawer(GravityCompat.START);
         }
-        else if(findViewById(R.id.replyLayout) != null && findViewById(R.id.replyLayout).getVisibility() == View.VISIBLE){
-            findViewById(R.id.replyLayout).setVisibility(View.GONE);
-        }
-        else if(!id.equals("")){
-            setComm(false);
-        }
-        else{
-            super.onBackPressed();
+        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if(findViewById(R.id.replyLayout) != null && Objects.requireNonNull(findViewById(R.id.replyLayout)).getVisibility() == View.VISIBLE){
+                Objects.requireNonNull(findViewById(R.id.replyLayout)).setVisibility(View.GONE);
+            }
+            else if(!id.equals("")){
+                setComm(false);
+            }
+            else{
+                super.onBackPressed();
+            }
         }
     }
 

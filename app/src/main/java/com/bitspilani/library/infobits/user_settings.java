@@ -153,6 +153,12 @@ public class user_settings extends homepage implements View.OnClickListener {
                 break;
 
             case R.id.update2:
+                if(oldPassword.getEditText().getText().toString().isEmpty() || newPassword.getEditText().getText().toString().isEmpty() ||
+                confirmPassword.getEditText().getText().toString().isEmpty())
+                {
+                    Toast.makeText(getApplicationContext(), "Please fill all details", Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 Snackbar.make(v, "Password update Server call", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 boolean validity = checkPasswordValidity(newPassword.getEditText().getText().toString(), confirmPassword.getEditText().getText().toString());
@@ -163,6 +169,8 @@ public class user_settings extends homepage implements View.OnClickListener {
                     } else {
                         Toast.makeText(getApplicationContext(), "Not Connected to BITS Intranet!", Toast.LENGTH_LONG).show();
                     }
+                }else{
+                    Toast.makeText(getApplicationContext(),"Passwords do not match",Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.upload:
@@ -302,7 +310,8 @@ public class user_settings extends homepage implements View.OnClickListener {
             }
 
             case "Change Password":{
-                String url = apiURL + "user_settings.php?username="+username +"&password="+password+"&new_value="+ newPassword.getEditText().getText().toString() +"&change_type=0";
+               // System.out.println("OLD PASSWORD"+oldPassword);
+                String url = apiURL + "user_settings.php?username="+username +"&password="+oldPassword.getEditText().getText().toString()+"&new_value="+ newPassword.getEditText().getText().toString() +"&change_type=0";
                 updateCall(url, queue);
                 break;
             }
@@ -380,13 +389,15 @@ public class user_settings extends homepage implements View.OnClickListener {
                     // Display the first 500 characters of the response string.
                     spinner.setVisibility(View.GONE);
                     showHideEdits(true);
-                    Toast.makeText(getApplicationContext(), "Response is: "+ response, Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                     try {
                         JSONObject json = new JSONObject(response);
                         if(urlS.contains("change_type=0") && json.get("status").toString().equals("1")){
                             edit_login_info.putString("password", urlS.substring(urlS.indexOf("new_value=") + 10, urlS.indexOf("&change_type=")));
                             edit_login_info.commit();
                         }
+                        if( json.get("status").toString().equals("0"))
+                            Toast.makeText(getApplicationContext(),json.get("Message").toString(),Toast.LENGTH_SHORT).show();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -423,13 +434,14 @@ public class user_settings extends homepage implements View.OnClickListener {
                 @Override
                 public void onResponse(String s) {
                     spinner.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), s , Toast.LENGTH_LONG).show();
                     try {
                         JSONObject json = new JSONObject(s);
+
                         if(url.contains("change_type=2") && json.get("status").toString().equals("1")){
                             File file = new File(dir, json.get("file_name").toString());
                             FileOutputStream fileOut;
                             try {
+                                Toast.makeText(getApplicationContext(),json.get("Message").toString(),Toast.LENGTH_SHORT).show();
                                 fileOut = new FileOutputStream(file);
                                 ((BitmapDrawable) image.getDrawable()).getBitmap().compress(Bitmap.CompressFormat.JPEG, 50, fileOut);
                                 edit_login_info.putString("avatar", file.getName());
@@ -441,6 +453,8 @@ public class user_settings extends homepage implements View.OnClickListener {
                             }catch (IOException e) {
                                 e.printStackTrace();
                             }
+                        }else{
+                            Toast.makeText(getApplicationContext(),json.get("Message").toString(),Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -451,7 +465,7 @@ public class user_settings extends homepage implements View.OnClickListener {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
                     spinner.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         ){

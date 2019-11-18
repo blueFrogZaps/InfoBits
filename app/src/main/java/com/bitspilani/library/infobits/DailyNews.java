@@ -97,7 +97,7 @@ public class DailyNews extends homepage{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (!urls.get(position).isEmpty()) {
                     if (!urls.get(position).equals("header")) {
-                        Intent browserIntent =new Intent(DailyNews.this,LoadBooks.class).putExtra("url",urls.get(position));
+                        Intent browserIntent =new Intent(Intent.ACTION_VIEW, Uri.parse(urls.get(position)));
                         startActivity(browserIntent);
                     }
                 } else {

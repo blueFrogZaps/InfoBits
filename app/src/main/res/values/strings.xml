@@ -21,7 +21,7 @@
     <string name="email">Email</string>
     <string name="mobile">Mobile</string>
     <string name="update">UPDATE</string>
-    <string name="mailID_sample">f20111ID@pilani.bits-pilani.ac.in</string>
+    <string name="mailID_sample">Loading</string>
     <string name="change_password">Change password</string>
     <string name="old_password">Old Password</string>
     <string name="new_password">New Password</string>
@@ -57,4 +57,5 @@
     <string name="book_review">Book Review</string>
     <string name="feedback">Feedback</string>
     <string name="refresh_data">Refresh Data</string>
+    <string name="claim_note">Note:\tBefore claiming the item please meet the librarian to verify and confirm your lost item.</string>
 </resources>
