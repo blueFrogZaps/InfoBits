@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.bitspilani.library.infobits.homepage"
+    tools:context="com.bitspilani.library.infoBits.homepage"
     android:id="@+id/drawer_layout"
     >
 
@@ -37,17 +37,19 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <android.support.v4.view.ViewPager
-            android:layout_width="fill_parent"
-            android:layout_height="260dp"
-            android:id="@+id/view_pager"
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/progressBar"
             android:visibility="gone"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:layout_above="@+id/pagination" />
+            android:layout_centerHorizontal="true"
+            android:progressTint="@color/colorPrimaryDark"
+            android:progressTintMode="src_in"
+            android:indeterminate="false"
+            tools:targetApi="lollipop" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -55,79 +57,123 @@
             android:layout_below="@+id/nav_toolbar"
             android:id="@+id/homeicons">
 
-            <ImageButton
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/os"
-                android:src="@mipmap/os"
-                android:onClick="onClickOs"
-                android:clickable="true"
-                android:layout_margin="12dip"
-                android:background="@color/colorPrimaryDark"
-                android:scaleType="fitCenter" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/libr"
-                android:src="@mipmap/libr"
-                android:onClick="onClickLibr"
-                android:clickable="true"
-                android:layout_toRightOf="@+id/os"
-                android:layout_margin="12dip"
-                android:background="@color/colorPrimaryDark"
-                android:scaleType="fitCenter" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/libs"
-                android:src="@mipmap/libs"
+                android:orientation="horizontal"
                 android:onClick="onClickLibs"
-                android:clickable="true"
-                android:layout_margin="12dp"
-                android:layout_toRightOf="@+id/libr"
-                android:background="@color/colorPrimaryDark"
-                android:scaleType="fitCenter" />
+                android:layout_margin="8dp"
+                android:background="#e0dfeb">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/libs"
+                    android:layout_margin="12dip"
+                    android:background="@color/colorPrimaryDark"
+                    android:scaleType="fitCenter"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="25sp"
+                    android:text="Library Services"
+                    android:layout_gravity="center"
 
-            <ImageButton
-                android:layout_width="wrap_content"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/opac"
-                android:onClick="onClickOPAC"
-                android:src="@mipmap/opac"
-                android:clickable="true"
-                android:layout_margin="12dp"
-                android:layout_below="@+id/os"
-                android:background="#211d70"
-                android:scaleType="fitCenter" />
+                android:orientation="horizontal"
+                android:onClick="onClickLibr"
+                android:layout_margin="8dp"
+                android:background="#e0dfeb">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/libr"
+                    android:layout_margin="12dip"
+                    android:background="@color/colorPrimaryDark"
+                    android:scaleType="fitCenter"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="25sp"
+                    android:text="Library Resources"
+                    android:layout_gravity="center"
 
-            <ImageButton
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:onClick="onClickOs"
+                android:layout_margin="8dp"
+                android:background="#e0dfeb">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/os"
+                    android:layout_margin="12dip"
+                    android:background="@color/colorPrimaryDark"
+                    android:scaleType="fitCenter"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="25sp"
+                    android:text="One Search(EBSCO)"
+                    android:layout_gravity="center"
+
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/homeicons"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/constLayout"
+            android:gravity="center_vertical"
+            >
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/dn"
-                android:src="@mipmap/dn"
-                android:onClick="onClickDN"
-                android:longClickable="true"
-                android:clickable="true"
-                android:layout_below="@+id/libr"
-                android:layout_toRightOf="@+id/opac"
-                android:layout_margin="12dp"
-                android:background="@color/colorPrimaryDark"
-                android:scaleType="fitCenter" />
-            <ImageButton
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.2" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/cwl"
-                android:onClick="onClickCWL"
-                android:src="@mipmap/cwl"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="1" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:clickable="true"
-                android:layout_margin="12dp"
-                android:layout_below="@+id/libs"
-                android:layout_toRightOf="@+id/dn"
-                android:background="@color/colorPrimaryDark"
-                android:scaleType="fitCenter" />
-        </RelativeLayout>
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+        </android.support.constraint.ConstraintLayout>
 
         <TextView
             android:layout_width="fill_parent"
@@ -141,24 +187,28 @@
             android:layout_alignParentBottom="true"
             android:visibility="visible" />
 
-        <RelativeLayout android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#fff"
-            android:id="@+id/pagination"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:visibility="gone">
 
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/paginationGroup"
-                android:layout_centerInParent="true">
 
-            </RadioGroup>
-        </RelativeLayout>
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:background="#fff"-->
+<!--            android:id="@+id/pagination"-->
+<!--            android:visibility="gone"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_alignParentLeft="true"-->
+<!--            >-->
+
+<!--            <RadioGroup-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:id="@+id/paginationGroup"-->
+<!--                android:layout_centerInParent="true">-->
+
+<!--            </RadioGroup>-->
+<!--        </RelativeLayout>-->
 
 
     </RelativeLayout>
@@ -166,18 +216,13 @@
 
     <android.support.design.widget.NavigationView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/navigation_view"
         android:layout_gravity="start"
         app:menu="@menu/drawer_menu"
         app:headerLayout="@layout/navigation_drawer_header"
         >
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tag"
-            android:layout_marginTop="517dp"
-            android:src="@drawable/tag" />
+               
     </android.support.design.widget.NavigationView>
 
 

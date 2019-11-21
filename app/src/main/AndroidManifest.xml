@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bitspilani.library.infobits">
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    package="com.bitspilani.library.infoBits">
 
     <application
-        android:name=".Library"
+        android:name="com.bitspilani.library.infoBits.Library"
         android:allowBackup="true"
         android:icon="@mipmap/infobits"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
+        <activity android:name="com.bitspilani.library.infoBits.LoadBooks"></activity>
         <activity
-            android:name=".Cover"
+            android:name="com.bitspilani.library.infoBits.Cover"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,160 +23,164 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".homepage"
+            android:name="com.bitspilani.library.infoBits.homepage"
             android:label="@string/app_name"
             android:logo="@mipmap/infobits"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <data android:scheme="http"
-                    android:host="universe.bits-pilani.ac.in"
-                    android:port="12354" />
+                <!-- <data android:scheme="http" -->
+                <!-- android:host="universe.bits-pilani.ac.in" -->
+                <!-- android:port="12354" /> -->
             </intent-filter>
         </activity>
         <activity
-            android:name=".LibRes"
+            android:name="com.bitspilani.library.infoBits.LibRes"
             android:label="@string/libres"
             android:logo="@mipmap/libr"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.bitspilani.library.infobits.homepage" />
+                android:value="com.bitspilani.library.infoBits.homepage" />
         </activity>
         <activity
-            android:name=".LibService"
+            android:name="com.bitspilani.library.infoBits.LibService"
             android:label="@string/libservice"
             android:logo="@mipmap/libs"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.bitspilani.library.infobits.homepage" />
+                android:value="com.bitspilani.library.infoBits.homepage" />
         </activity>
         <activity
-            android:name=".ConnectWithLibrary"
+            android:name="com.bitspilani.library.infoBits.ConnectWithLibrary"
             android:label="@string/title_activity_communication_panel"
-            android:parentActivityName=".homepage"
+            android:parentActivityName="com.bitspilani.library.infoBits.homepage"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.bitspilani.library.infobits.homepage" />
+                android:value="com.bitspilani.library.infoBits.homepage" />
         </activity>
         <activity
-            android:name=".DailyNews"
+            android:name="com.bitspilani.library.infoBits.DailyNews"
             android:label="@string/title_activity_daily_news"
-            android:parentActivityName=".homepage"
+            android:parentActivityName="com.bitspilani.library.infoBits.homepage"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.bitspilani.library.infobits.homepage" />
+                android:value="com.bitspilani.library.infoBits.homepage" />
         </activity>
         <activity
-            android:name=".CommForms"
+            android:name="com.bitspilani.library.infoBits.CommForms"
             android:label="CommForm"
-            android:parentActivityName=".ConnectWithLibrary"
+            android:parentActivityName="com.bitspilani.library.infoBits.ConnectWithLibrary"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.bitspilani.library.infobits.homepage" />
+                android:value="com.bitspilani.library.infoBits.homepage" />
         </activity>
         <activity
-            android:name=".login"
+            android:name="com.bitspilani.library.infoBits.login"
             android:label="@string/Login"
-            android:parentActivityName=".homepage"
+            android:parentActivityName="com.bitspilani.library.infoBits.homepage"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.bitspilani.library.infobits.homepage" />
+                android:value="com.bitspilani.library.infoBits.homepage" />
         </activity>
         <activity
-            android:name=".user_settings"
+            android:name="com.bitspilani.library.infoBits.user_settings"
             android:label="@string/title_activity_user_settings"
-            android:parentActivityName=".homepage"
+            android:parentActivityName="com.bitspilani.library.infoBits.homepage"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.bitspilani.library.infobits.homepage" />
-        </activity>
-        <!--<activity-->
-            <!--android:name=".signup"-->
-            <!--android:label="@string/Signup"-->
-            <!--android:parentActivityName=".homepage"-->
-            <!--android:screenOrientation="portrait"-->
-            <!--android:theme="@style/AppTheme.NoActionBar">-->
-            <!--<meta-data-->
-                <!--android:name="android.support.PARENT_ACTIVITY"-->
-                <!--android:value="com.bitspilani.library.infobits.homepage" />-->
-        <!--</activity>-->
+                android:value="com.bitspilani.library.infoBits.homepage" />
+        </activity> <!-- <activity -->
+        <!-- android:name=".signup" -->
+        <!-- android:label="@string/Signup" -->
+        <!-- android:parentActivityName=".homepage" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:theme="@style/AppTheme.NoActionBar"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.support.PARENT_ACTIVITY" -->
+        <!-- android:value="com.bitspilani.library.infobits.homepage" /> -->
+        <!-- </activity> -->
         <activity
-            android:name=".ebooks"
+            android:name="com.bitspilani.library.infoBits.ebooks"
             android:label="@string/title_activity_ebooks"
-            android:parentActivityName=".homepage"
+            android:parentActivityName="com.bitspilani.library.infoBits.homepage"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.bitspilani.library.infobits.homepage" />
+                android:value="com.bitspilani.library.infoBits.homepage" />
         </activity>
         <activity
-            android:name=".downloadable_links"
+            android:name="com.bitspilani.library.infoBits.downloadable_links"
             android:label="@string/title_activity_ebooks"
-            android:parentActivityName=".ebooks"
+            android:parentActivityName="com.bitspilani.library.infoBits.ebooks"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.bitspilani.library.infobits.homepage" />
+                android:value="com.bitspilani.library.infoBits.homepage" />
         </activity>
         <activity
-            android:name=".infoBitsBulletin"
+            android:name="com.bitspilani.library.infoBits.infoBitsBulletin"
             android:label="@string/title_infoBits"
-            android:parentActivityName=".homepage"
+            android:parentActivityName="com.bitspilani.library.infoBits.homepage"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.bitspilani.library.infobits.homepage" />
+                android:value="com.bitspilani.library.infoBits.homepage" />
         </activity>
-
         <!--
      ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        <activity
+            android:name="com.bitspilani.library.infoBits.forgot_password"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".forgot_password"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".OnlineDb"
+        <activity
+            android:name="com.bitspilani.library.infoBits.OnlineDb"
             android:label="@string/online_db"
-            android:parentActivityName=".homepage"
+            android:parentActivityName="com.bitspilani.library.infoBits.homepage"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.bitspilani.library.infobits.homepage" />
+                android:value="com.bitspilani.library.infoBits.homepage" />
         </activity>
-        <activity android:name=".lfmsAllItems"
+        <activity
+            android:name="com.bitspilani.library.infoBits.lfmsAllItems"
             android:label="@string/lost_and_found"
-            android:theme="@style/AppTheme"
+            android:logo="@mipmap/lf"
             android:screenOrientation="portrait"
-            android:logo="@mipmap/lf">
-        </activity>
-        <activity android:name=".Claim"
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name="com.bitspilani.library.infoBits.Claim"
             android:label="@string/claim_lost_item"
-            android:theme="@style/AppTheme"
+            android:logo="@mipmap/lf"
             android:screenOrientation="portrait"
-            android:logo="@mipmap/lf" />
+            android:theme="@style/AppTheme" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

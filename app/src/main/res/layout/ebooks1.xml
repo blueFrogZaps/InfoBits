@@ -25,6 +25,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -50,7 +52,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/endNote"
             android:padding="5dp"
-            android:text="EBSCO Credentials:\nUsername - bitspilani\nPassword - Pilanibits2016"
+            android:text="EBSCO Credentials:\nUsername - BITSPilani\nPassword - Rajas2020!"
             android:layout_below="@+id/ebooksText"
             android:textColor="@color/colorPrimaryDark" />
 

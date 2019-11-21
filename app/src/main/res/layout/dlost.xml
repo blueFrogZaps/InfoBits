@@ -66,27 +66,27 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Books"
-                android:id="@+id/radioB"
-                android:checked="true"
-                android:layout_alignTop="@+id/radioCompliment"
-                android:layout_toLeftOf="@+id/newConv"
-                android:layout_toStartOf="@+id/newConv"
-                android:textSize="20sp"
-                android:buttonTint="#211d70" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Journals"
                 android:id="@+id/radioJ"
-                android:checked="false"
+                android:checked="true"
                 android:layout_alignTop="@+id/radioCompliment"
                 android:layout_toRightOf="@+id/radioCompliment"
                 android:layout_toEndOf="@+id/radioCompliment"
                 android:textSize="20sp"
                 android:buttonTint="#211d70"
-                android:layout_marginLeft="25dp" />
+               />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Books"
+                android:id="@+id/radioB"
+                android:checked="false"
+                android:layout_alignTop="@+id/radioCompliment"
+                android:layout_toLeftOf="@+id/newConv"
+                android:layout_toStartOf="@+id/newConv"
+                android:textSize="20sp"
+                android:layout_marginLeft="25dp"
+                android:buttonTint="#211d70" />
 
         </RadioGroup>
         <RelativeLayout

@@ -6,7 +6,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/user_settings" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bitspilani.library.infobits.user_settings">
+    tools:context="com.bitspilani.library.infoBits.user_settings">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                     android:id="@+id/profile"
                     android:padding="10dp"
                     android:visibility="visible"
-                    android:src="@mipmap/logo"
+                    android:src="@drawable/account"
                     android:layout_gravity="center_horizontal" />
 
                 <ImageButton
@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/Username"
+                    android:text="Loading"
                     android:id="@+id/textView2"
                     android:layout_marginLeft="10dp" />
             </LinearLayout>
